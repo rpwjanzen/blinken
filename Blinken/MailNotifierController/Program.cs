@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Drawing;
+using Blinken;
 
-namespace Blinken
+namespace MailNotifierController
 {
     class Program
     {

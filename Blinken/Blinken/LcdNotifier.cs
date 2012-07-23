@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using HidLibrary;
+using System.Collections;
 
 namespace Blinken
 {
@@ -17,8 +18,33 @@ namespace Blinken
 
                 device.OpenDevice();
                 System.Threading.Thread.Sleep(2500);
+                while (true)
+                {
+                    DoIt(device);
+                }
+                //DoEye(device);
+            }
+        }
 
-                DoEye(device);
+        private static void DoIt(HidDevice device)
+        {
+            int i = 0;
+            while(true)
+            {
+                i++;
+                i %= 3;
+                LedBrightness b = (LedBrightness)i;
+                byte[] p0 = GetUsbData(b, StartingRow.Zero, 0x00);
+                byte[] p1 = GetUsbData(b, StartingRow.Second, 0x00);
+                byte[] p2 = GetUsbData(b, StartingRow.Fourth, 0x00);
+                byte[] p3 = GetUsbData(b, StartingRow.Sixth, 0x00);
+
+                device.Write(p0);
+                device.Write(p1);
+                device.Write(p2);
+                device.Write(p3);
+
+                System.Threading.Thread.Sleep(400);
             }
         }
 
@@ -53,5 +79,26 @@ namespace Blinken
                 System.Threading.Thread.Sleep(400);
             }
         }
+
+        // 21x7 LEDs in board
+        private static byte [] GetUsbData(LedBrightness ledBrightness, StartingRow startingRow, byte fill)
+        {
+            byte brightness = (byte)ledBrightness;
+            byte row0 = (byte)startingRow;
+            byte row1 = (byte)(((int)row0) + 1);
+
+            byte[] data = new byte [] {
+                0x00, // padding?
+                brightness, row0,
+                fill, fill, fill,
+                fill, fill, fill,
+            };
+
+            return data;
+        }
     }
+
+    enum LedBrightness : byte { Low = 0, Med = 1, High = 2 }
+
+    enum StartingRow : byte { Zero = 0, Second = 2, Fourth = 4, Sixth = 6 }
 }
