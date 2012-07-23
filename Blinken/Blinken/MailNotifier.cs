@@ -42,9 +42,40 @@ namespace Blinken
             WriteData(m_device, usbData);
         }
 
-        public void DoFade(Color start)
+        public void DoFadeRed()
         {
-            
+            WriteData(m_device, Color.FromArgb(0, 0, 0).ToNotifierColor().ToUsbData());
+            System.Threading.Thread.Sleep(500);
+
+            WriteData(m_device, Color.FromArgb(1, 0, 0).ToNotifierColor().ToUsbData());
+            System.Threading.Thread.Sleep(300);
+
+            WriteData(m_device, Color.FromArgb(33, 0, 0).ToNotifierColor().ToUsbData());
+            System.Threading.Thread.Sleep(1000);
+        }
+
+        public void DoFadeBlue()
+        {
+            WriteData(m_device, Color.FromArgb(0, 0, 0).ToNotifierColor().ToUsbData());
+            System.Threading.Thread.Sleep(500);
+
+            WriteData(m_device, Color.FromArgb(0, 0, 1).ToNotifierColor().ToUsbData());
+            System.Threading.Thread.Sleep(300);
+
+            WriteData(m_device, Color.FromArgb(0, 0, 33).ToNotifierColor().ToUsbData());
+            System.Threading.Thread.Sleep(1000);
+        }
+
+        public void DoFadeGreen()
+        {
+            WriteData(m_device, Color.FromArgb(0, 0, 0).ToNotifierColor().ToUsbData());
+            System.Threading.Thread.Sleep(500);
+
+            WriteData(m_device, Color.FromArgb(0, 1, 0).ToNotifierColor().ToUsbData());
+            System.Threading.Thread.Sleep(300);
+
+            WriteData(m_device, Color.FromArgb(0, 33, 0).ToNotifierColor().ToUsbData());
+            System.Threading.Thread.Sleep(1000);
         }
 
         public void DoRainbow()
