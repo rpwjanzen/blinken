@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using HidLibrary;
 using System.Collections;
+using System.Drawing;
 
 namespace Blinken
 {
@@ -21,6 +22,7 @@ namespace Blinken
                 while (true)
                 {
                     DoIt(device);
+                    DoText(device);
                 }
                 //DoEye(device);
             }
@@ -84,17 +86,34 @@ namespace Blinken
         private static byte [] GetUsbData(LedBrightness ledBrightness, StartingRow startingRow, byte fill)
         {
             byte brightness = (byte)ledBrightness;
-            byte row0 = (byte)startingRow;
-            byte row1 = (byte)(((int)row0) + 1);
+            byte row = (byte)startingRow;
 
             byte[] data = new byte [] {
                 0x00, // padding?
-                brightness, row0,
+                brightness, row,
                 fill, fill, fill,
                 fill, fill, fill,
             };
 
             return data;
+        }
+
+        private static void DoText(HidDevice device)
+        {
+            LcdScreen lcdScreen = new LcdScreen();
+
+            string text = "ABC";
+            var characters = text.Select(c => Alphabet.Letters[c]).ToList();
+            Point upperLeft = Point.Empty;
+            foreach(var c in characters)
+            {
+                lcdScreen.Blit(c.Data, upperLeft);
+                upperLeft.X = upperLeft.X + c.Data.GetLength(0);
+            }
+
+            var usbData = lcdScreen.GetUsbData();
+            foreach (var data in usbData)
+                device.Write(data);
         }
     }
 
