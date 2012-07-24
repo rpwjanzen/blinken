@@ -6,22 +6,40 @@ namespace Blinken.Extensions
     public static class ColorEx
     {
         public static List<NotifierColor> AllColors = new List<NotifierColor>();
+        private const byte High = 33;
+        private const byte Low = 1;
+        private const byte Off = 0;
 
         static ColorEx()
         {
             List<NotifierColor> colors = new List<NotifierColor>();
-            for (int r = 0; r < 96; r += 32)
-            {
-                for (int g = 0; g < 96; g += 32)
-                {
-                    for (int b = 0; b < 96; b += 32)
-                    {
-                        colors.Add(Color.FromArgb(r,g,b).ToNotifierColor());
-                    }
-                }
-            }
+            // reds
+            colors.Add(MakeColor(High, Off, Off));
+            colors.Add(MakeColor(High, Low, Low));
+
+            // orange
+            colors.Add(MakeColor(High, Low, Off));
+
+            // yellow
+            colors.Add(MakeColor(High, High, Off));
+
+            // greens
+            colors.Add(MakeColor(Low, High, Off));
+            colors.Add(MakeColor(Off, High, Off));
+            colors.Add(MakeColor(Off, Low, Low));
+
+            // blues
+            colors.Add(MakeColor(Off, Off, High));
+            colors.Add(MakeColor(Low, Low, High));
+            colors.Add(MakeColor(Low, Off, High));
+            colors.Add(MakeColor(Low, Off, Low));
 
             AllColors = colors;
+        }
+
+        private static NotifierColor MakeColor(byte r, byte g, byte b)
+        {
+            return Color.FromArgb(r, g, b).ToNotifierColor();
         }
 
         public static NotifierColor ToNotifierColor(this Color color)

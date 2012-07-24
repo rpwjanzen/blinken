@@ -10,10 +10,13 @@ namespace MailNotifierController
         {
             if (args.Length != 1)
             {
+                return;
+            }
+            else if (args[0] == "rainbow")
+            {
                 var mailNotifier = new MailNotifier();
                 Console.WriteLine("Rainbow!");
                 mailNotifier.DoRainbow();
-                return;
             }
             else if (args[0] == "fade")
             {
