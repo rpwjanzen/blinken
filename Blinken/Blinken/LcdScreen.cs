@@ -3,28 +3,53 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using System.Diagnostics;
 
 namespace Blinken
 {
+    [DebuggerDisplay("{Text}")]
     public sealed class LcdScreen
     {
         public const int Width = 21;
         public const int Height = 7;
 
-        public readonly byte[,] Data = new byte [Width,Height];
+        public readonly byte[,] Data = new byte[Width, Height];
 
         public void Blit(byte[,] source, Point upperLeft)
         {
-            int sr = 0;
-            for (int r = upperLeft.Y; r < source.GetLength(0); r++)
+            int sc = 0;
+            for (int c = 0; c < source.GetLength(0); c++)
             {
-                int sc = 0;
-                for (int c = upperLeft.X; c < source.GetLength(1); c++)
+                int sr = 0;
+                for (int r = 0; r < source.GetLength(1); r++)
                 {
-                    Data[r, c] = source[sr, sc];
-                    sc++;
+                    if (c + upperLeft.X < Data.GetLength(0)
+                        && r + upperLeft.Y < Data.GetLength(1))
+                    {
+                        Data[c + upperLeft.X, r + upperLeft.Y] = source[sc, sr];
+                    }
+                    sr++;
                 }
-                sr++;
+                sc++;
+            }
+        }
+
+        public string Text
+        {
+            get
+            {
+                StringBuilder sb = new StringBuilder();
+                for (int c = 0; c < Data.GetLength(1); c++)
+                {
+                    for (int r = 0; r < Data.GetLength(0); r++)
+                    {
+                        byte b = Data[r, c];
+                        sb.Append(b);
+                    }
+                    sb.AppendLine();
+                }
+
+                return sb.ToString();
             }
         }
 
@@ -33,10 +58,10 @@ namespace Blinken
             List<byte[]> bytes = new List<byte[]>();
             for (int row = 0; row <= 6; row += 2)
             {
-                byte [] r0 = new byte [21];
-                for(int c = 0; c < 21; c++)
+                byte[] r0 = new byte[21];
+                for (int c = 0; c < 21; c++)
                 {
-                    r0[c] = Data[row,c];
+                    r0[c] = Data[c, row];
                 }
 
                 var bs0 = GetUsbBytes(r0);
@@ -47,7 +72,7 @@ namespace Blinken
                     byte[] r1 = new byte[21];
                     for (int c = 0; c < 21; c++)
                     {
-                        r1[c] = Data[row + 1, c];
+                        r1[c] = Data[c, row + 1];
                     }
 
                     bs1 = GetUsbBytes(r1);
@@ -58,7 +83,10 @@ namespace Blinken
                     bs1 = new byte[3];
                 }
 
-                var usbData = GetUsbData(LedBrightness.Low, (byte)(row + 1),
+                bs0[2] |= 0x07;
+                bs1[2] |= 0x07;
+
+                var usbData = GetUsbData(LedBrightness.Low, (byte)row,
                     bs0[0], bs0[1], bs0[2],
                     bs1[0], bs1[1], bs1[2]);
 
@@ -74,7 +102,7 @@ namespace Blinken
 
             byte b0 = 0;
             byte mask = 0x80;
-            for(int i = 0; i < 8; i++)
+            for (int i = 0; i < 8; i++)
             {
                 byte pixelData = rowData[i];
                 if (pixelData == 0)
@@ -105,7 +133,7 @@ namespace Blinken
                 mask = (byte)(mask >> 1);
             }
 
-            return new byte [] { b0, b1, b2 };
+            return new byte[] { b0, b1, b2 };
         }
 
         // 21x7 LEDs in board, 2 rows at a time
@@ -113,14 +141,40 @@ namespace Blinken
         {
             byte brightness = (byte)ledBrightness;
 
+            // need to reverse the order of the bits in each byte
+            b0 = Reverse(b0);
+            b1 = Reverse(b1);
+            b2 = Reverse(b2);
+            b3 = Reverse(b3);
+            b4 = Reverse(b4);
+            b5 = Reverse(b5);
+
             byte[] data = new byte[] {
                 0x00, // padding?
                 brightness, startingRow,
-                b0, b1, b2,
-                b3, b4, b5,
+                b2, b1, b0,
+                b5, b4, b3,
             };
 
             return data;
+        }
+
+        private byte Reverse(byte b)
+        {
+            // input bits to be reversed
+            byte r = b; // r will be reversed bits of v; first get LSB of v
+            int s = 8 * 1 - 1; // extra shift needed at end
+
+            for (b >>= 1; b > 0; b >>= 1)
+            {   
+              r <<= 1;
+              r |= (byte)(b & (byte)1);
+              s--;
+            }
+
+            r <<= s; // shift when v's highest bits are zero
+
+            return r;
         }
     }
 }

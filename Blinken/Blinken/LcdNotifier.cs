@@ -10,6 +10,8 @@ namespace Blinken
 {
     public sealed class LcdNotifier
     {
+        private readonly HidDevice m_device;
+
         public LcdNotifier()
         {
             var devices = HidLibrary.HidDevices.Enumerate(0x1D34, 0x0013);
@@ -18,106 +20,84 @@ namespace Blinken
                 Console.WriteLine("Woot");
 
                 device.OpenDevice();
-                System.Threading.Thread.Sleep(2500);
-                while (true)
+                m_device = device;
+                break;
+            }
+        }
+
+        private readonly List<string> m_lines = new List<string>();
+        private string m_text;
+        public string Text
+        {
+            get { return m_text; }
+            set
+            {
+                m_text = value ?? string.Empty;
+
+                m_lines.Clear();
+
+                string [] words = Text.Split(' ');
+                foreach (var word in words)
                 {
-                    DoIt(device);
-                    DoText(device);
+                    string w = word;
+
+                    while (w.Length > 5)
+                    {
+                        string part = w.Substring(0, 5);
+                        //w = part;
+                        m_lines.Add(part);
+
+                        w = '-' + w.Substring(5);
+                    }
+                    m_lines.Add(w);
                 }
-                //DoEye(device);
             }
         }
 
-        private static void DoIt(HidDevice device)
+        public void DrawText()
         {
-            int i = 0;
-            while(true)
+            foreach(var line in m_lines)
             {
-                i++;
-                i %= 3;
-                LedBrightness b = (LedBrightness)i;
-                byte[] p0 = GetUsbData(b, StartingRow.Zero, 0x00);
-                byte[] p1 = GetUsbData(b, StartingRow.Second, 0x00);
-                byte[] p2 = GetUsbData(b, StartingRow.Fourth, 0x00);
-                byte[] p3 = GetUsbData(b, StartingRow.Sixth, 0x00);
-
-                device.Write(p0);
-                device.Write(p1);
-                device.Write(p2);
-                device.Write(p3);
-
+                DoText(m_device, line);
+                System.Threading.Thread.Sleep(400);
+                DoText(m_device, line);
                 System.Threading.Thread.Sleep(400);
             }
         }
 
-        private void DoEye(HidDevice device)
-        {
-            while (true)
-            {
-                byte[] Packet0 = new byte[] { 0x00, 0x00, 0x00, 0xFF, 0xFC, 0x7F, 0xFF, 0xF8, 0x3F };
-                byte[] Packet1 = new byte[] { 0x00, 0x00, 0x02, 0xFF, 0xF0, 0x1F, 0xFF, 0xE0, 0x0F };
-                byte[] Packet2 = new byte[] { 0x00, 0x00, 0x04, 0xFF, 0xF0, 0x1F, 0xFF, 0xF8, 0x3F };
-                byte[] Packet3 = new byte[] { 0x00, 0x00, 0x06, 0xFF, 0xFC, 0x7F,
-                    0xFF, 0xFF, 0xFF };
-
-                device.Write(Packet0);
-                device.Write(Packet1);
-                device.Write(Packet2);
-                device.Write(Packet3);
-
-                System.Threading.Thread.Sleep(400);
-
-                byte[] Packet4 = new byte[] { 0x00, 0x00, 0x00, 0xFF, 0xFE, 0xFF, 0xFF, 0xFD, 0x7F };
-                byte[] Packet5 = new byte[] { 0x00, 0x00, 0x02, 0xFF, 0xFB, 0xBF, 0xFF, 0xF7, 0xDF };
-                byte[] Packet6 = new byte[] { 0x00, 0x00, 0x04, 0xFF, 0xFB, 0xBF, 0xFF, 0xFD, 0x7F };
-                byte[] Packet7 = new byte[] { 0x00, 0x00, 0x06, 0xFF, 0xFE, 0xFF,
-                    0xFF, 0xFF, 0xFF };
-
-                device.Write(Packet4);
-                device.Write(Packet5);
-                device.Write(Packet6);
-                device.Write(Packet7);
-
-                System.Threading.Thread.Sleep(400);
-            }
-        }
-
-        // 21x7 LEDs in board
-        private static byte [] GetUsbData(LedBrightness ledBrightness, StartingRow startingRow, byte fill)
-        {
-            byte brightness = (byte)ledBrightness;
-            byte row = (byte)startingRow;
-
-            byte[] data = new byte [] {
-                0x00, // padding?
-                brightness, row,
-                fill, fill, fill,
-                fill, fill, fill,
-            };
-
-            return data;
-        }
-
-        private static void DoText(HidDevice device)
+        private static void DoText(HidDevice device, string text)
         {
             LcdScreen lcdScreen = new LcdScreen();
+            var characters = text.Select(c => Alphabet.Letters[c]).Select(c =>
+                {
+                    // need to rotate 90 degrees to the right
+                    var c0 = new byte[c.Data.GetLength(1), c.Data.GetLength(0)];
+                    for (int col = 0; col < c.Data.GetLength(0); col++)
+                    {
+                        for (int r = 0; r < c.Data.GetLength(1); r++)
+                        {
+                            c0[r, col] = c.Data[col, r];
+                        }
+                    }
 
-            string text = "ABC";
-            var characters = text.Select(c => Alphabet.Letters[c]).ToList();
+                    return c0;
+                }).ToList();
+
             Point upperLeft = Point.Empty;
             foreach(var c in characters)
             {
-                lcdScreen.Blit(c.Data, upperLeft);
-                upperLeft.X = upperLeft.X + c.Data.GetLength(0);
+                lcdScreen.Blit(c, upperLeft);
+                upperLeft.X = upperLeft.X + c.GetLength(0) + 1;
             }
 
             var usbData = lcdScreen.GetUsbData();
-            foreach (var data in usbData)
-                device.Write(data);
+
+            for (int i = 0; i < usbData.Count; i++)
+            {
+                device.Write(usbData[i]);
+            }
         }
     }
 
     enum LedBrightness : byte { Low = 0, Med = 1, High = 2 }
-
-    enum StartingRow : byte { Zero = 0, Second = 2, Fourth = 4, Sixth = 6 }
 }
