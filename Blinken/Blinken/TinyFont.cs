@@ -8,7 +8,7 @@ namespace Blinken
 {
     public static class Alphabet
     {
-        public static Letter Letters = new Letter(null);
+        public static Letter Letters = new Letter(new byte[0,0]);
     }
 
     // ripped from http://www.dafont.com/tiny.font
@@ -18,7 +18,17 @@ namespace Blinken
 
         public Letter(byte [,] data)
         {
-            Data = data;
+            // need to rotate 90 degrees to the right
+            var c0 = new byte[data.GetLength(1), data.GetLength(0)];
+            for (int c = 0; c < data.GetLength(0); c++)
+            {
+                for (int r = 0; r < data.GetLength(1); r++)
+                {
+                    c0[r, c] = data[c, r];
+                }
+            }
+
+            Data = c0;
         }
 
         public Letter this[char c]
@@ -92,8 +102,11 @@ namespace Blinken
                         return COMMA;
                     case '.':
                         return PERIOD;
+                    case ' ':
+                        return SPACE;
                     default:
-                        return null;
+                        throw new Exception();
+                        //return null;
                 }
             }
         }
@@ -448,6 +461,16 @@ namespace Blinken
             { 0 },
             { 0 },
             { 1 },
+        });
+
+        public static Letter SPACE = new Letter(new byte[,]
+        {
+            { 0,0,0 },
+            { 0,0,0 },
+            { 0,0,0 },
+            { 0,0,0 },
+            { 0,0,0 },
+            { 0,0,0 },
         });
     }
 }

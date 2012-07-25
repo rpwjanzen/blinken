@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual C# Express 2010
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blinken", "Blinken\Blinken.csproj", "{4AD0FBED-C100-4535-8FF9-4E8ADD70DE33}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignController", "SignController\SignController.csproj", "{DD134147-9329-4D80-9235-2A53C3DE7542}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailNotifierController", "MailNotifierController\MailNotifierController.csproj", "{8ADE9927-ED1E-49C5-8B05-CC59E4319311}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignService", "SignService\SignService.csproj", "{C198CEA0-FA5F-4993-9076-EEDB5D489C0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignTextChanger", "SignTextChanger\SignTextChanger.csproj", "{E3FAF0C3-268F-4F3B-A35B-D1C04836B93A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +29,14 @@ Global
 		{8ADE9927-ED1E-49C5-8B05-CC59E4319311}.Debug|x86.Build.0 = Debug|x86
 		{8ADE9927-ED1E-49C5-8B05-CC59E4319311}.Release|x86.ActiveCfg = Release|x86
 		{8ADE9927-ED1E-49C5-8B05-CC59E4319311}.Release|x86.Build.0 = Release|x86
+		{C198CEA0-FA5F-4993-9076-EEDB5D489C0A}.Debug|x86.ActiveCfg = Debug|x86
+		{C198CEA0-FA5F-4993-9076-EEDB5D489C0A}.Debug|x86.Build.0 = Debug|x86
+		{C198CEA0-FA5F-4993-9076-EEDB5D489C0A}.Release|x86.ActiveCfg = Release|x86
+		{C198CEA0-FA5F-4993-9076-EEDB5D489C0A}.Release|x86.Build.0 = Release|x86
+		{E3FAF0C3-268F-4F3B-A35B-D1C04836B93A}.Debug|x86.ActiveCfg = Debug|x86
+		{E3FAF0C3-268F-4F3B-A35B-D1C04836B93A}.Debug|x86.Build.0 = Debug|x86
+		{E3FAF0C3-268F-4F3B-A35B-D1C04836B93A}.Release|x86.ActiveCfg = Release|x86
+		{E3FAF0C3-268F-4F3B-A35B-D1C04836B93A}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

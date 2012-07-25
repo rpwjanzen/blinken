@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="9efddd7c-65a8-480a-9635-545cbfda17fb" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8001/ledsign" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ledsign.xsd" MetadataType="Schema" ID="8467ddea-1005-4117-bea9-2cacbbeb21b7" SourceId="1" SourceUrl="http://localhost:8001/ledsign?xsd=xsd1" />
+    <MetadataFile FileName="ledsign1.xsd" MetadataType="Schema" ID="b7a80f33-d70d-45b3-a5ab-0be15fe46870" SourceId="1" SourceUrl="http://localhost:8001/ledsign?xsd=xsd0" />
+    <MetadataFile FileName="SignService.wsdl" MetadataType="Wsdl" ID="907132d5-28fd-4a11-9897-06291ad84cc2" SourceId="1" SourceUrl="http://localhost:8001/ledsign" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
