@@ -13,53 +13,86 @@ namespace SignService
     {
         static void Main(string[] args)
         {
-            Uri baseAddress = new Uri("http://localhost:8000/ledsign/service");
-            string address = "net.pipe://localhost/ledsign/sign";
-
-            // Create a ServiceHost for the CalculatorService type and provide the base address.
-            SignService signService = new SignService();
-            using (ServiceHost serviceHost = new ServiceHost(signService, baseAddress))
+            if (args.Length > 0)
             {
-                NetNamedPipeBinding binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
-                serviceHost.AddServiceEndpoint(typeof(ISignService), binding, address);
+                Uri baseAddress = new Uri("http://localhost:8000/ledsign/service");
+                ServiceHost serviceHost = new ServiceHost(new SignService(), baseAddress);
+                try
+                {
+                    // full service url is: http://localhost:8000/ledsign/service/ledsign
+                    serviceHost.AddServiceEndpoint(typeof(ISignService), new WSHttpBinding(SecurityMode.None), "ledsign");
 
-                // Add a mex endpoint
-                ServiceMetadataBehavior smb = new ServiceMetadataBehavior();
-                smb.HttpGetEnabled = true;
-                smb.HttpGetUrl = new Uri("http://localhost:8001/ledsign");
-                serviceHost.Description.Behaviors.Add(smb);
+                    // create a mex behavior
+                    ServiceMetadataBehavior smb = new ServiceMetadataBehavior()
+                    {
+                        HttpGetEnabled = true,
+                    };
+                    serviceHost.Description.Behaviors.Add(smb);
 
-                long maxBufferPoolSize = binding.MaxBufferPoolSize;
+                    serviceHost.Open();
 
-                int maxBufferSize = binding.MaxBufferSize;
+                    Console.WriteLine("The service is ready.");
+                    Console.ReadLine();
 
-                int maxConnections = binding.MaxConnections;
+                    serviceHost.Close();
+                }
+                catch (CommunicationException e)
+                {
+                    Console.WriteLine("An exception occurred " + e.Message);
+                    serviceHost.Abort();
+                    Console.ReadLine();
+                }
+            }
+            else
+            {
+                Uri baseAddress = new Uri("http://localhost:8000/ledsign/service");
+                string address = "net.pipe://localhost/ledsign/sign";
 
-                long maxReceivedMessageSize =
-                    binding.MaxReceivedMessageSize;
+                // Create a ServiceHost for the CalculatorService type and provide the base address.
+                SignService signService = new SignService();
+                using (ServiceHost serviceHost = new ServiceHost(signService, baseAddress))
+                {
+                    NetNamedPipeBinding binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
+                    serviceHost.AddServiceEndpoint(typeof(ISignService), binding, address);
 
-                NetNamedPipeSecurity security = binding.Security;
+                    // Add a mex endpoint
+                    ServiceMetadataBehavior smb = new ServiceMetadataBehavior();
+                    smb.HttpGetEnabled = true;
+                    smb.HttpGetUrl = new Uri("http://localhost:8001/ledsign");
+                    serviceHost.Description.Behaviors.Add(smb);
 
-                string scheme = binding.Scheme;
-                var bCollection = binding.CreateBindingElements();
+                    long maxBufferPoolSize = binding.MaxBufferPoolSize;
 
-                HostNameComparisonMode hostNameComparisonMode =
-                    binding.HostNameComparisonMode;
+                    int maxBufferSize = binding.MaxBufferSize;
 
-                bool TransactionFlow = binding.TransactionFlow;
+                    int maxConnections = binding.MaxConnections;
 
-                TransactionProtocol transactionProtocol = binding.TransactionProtocol;
-                EnvelopeVersion envelopeVersion = binding.EnvelopeVersion;
-                TransferMode transferMode = binding.TransferMode;
+                    long maxReceivedMessageSize =
+                        binding.MaxReceivedMessageSize;
 
-                serviceHost.Open();
+                    NetNamedPipeSecurity security = binding.Security;
 
-                Console.WriteLine("The service is ready.");
-                Console.WriteLine("Press <ENTER> to terminate service.");
-                Console.WriteLine();
-                Console.ReadLine();
+                    string scheme = binding.Scheme;
+                    var bCollection = binding.CreateBindingElements();
 
-                serviceHost.Close();
+                    HostNameComparisonMode hostNameComparisonMode =
+                        binding.HostNameComparisonMode;
+
+                    bool TransactionFlow = binding.TransactionFlow;
+
+                    TransactionProtocol transactionProtocol = binding.TransactionProtocol;
+                    EnvelopeVersion envelopeVersion = binding.EnvelopeVersion;
+                    TransferMode transferMode = binding.TransferMode;
+
+                    serviceHost.Open();
+
+                    Console.WriteLine("The service is ready.");
+                    Console.WriteLine("Press <ENTER> to terminate service.");
+                    Console.WriteLine();
+                    Console.ReadLine();
+
+                    serviceHost.Close();
+                }
             }
         }
     }
