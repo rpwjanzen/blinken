@@ -5,12 +5,14 @@ using System.Text;
 using HidLibrary;
 using System.Collections;
 using System.Drawing;
+using Blinken.Font;
 
 namespace Blinken
 {
     public sealed class LcdNotifier
     {
         private readonly HidDevice m_device;
+        
 
         public LcdNotifier()
         {
@@ -27,18 +29,24 @@ namespace Blinken
 
         public string Text;
 
-        public void DrawText()
+        public void DrawText(LedFont font)
         {
-            DoText(m_device, Text);
+            DoText(m_device, Text, font);
             System.Threading.Thread.Sleep(400);
         }
 
-        private static void DoText(HidDevice device, string text)
+        private static void DoText(HidDevice device, string text, LedFont font)
         {
             VirtualLcdScreen lcdScreen = new VirtualLcdScreen();
-            var characters = text
-                .Select(c => Alphabet.Letters[c])
-                .ToList();
+            List<Letter> characters;
+            if (font == null)
+                characters = text
+                    .Select(c => AlphabetOld.Letters[c])
+                    .ToList();
+            else
+                characters = text
+                    .Select(c => font[c])
+                    .ToList();
 
             int totalCharacterWidths = characters
                 .Aggregate(0, (acc, l) => l.Data.GetLength(0) + 1 + acc);

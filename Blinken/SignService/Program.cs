@@ -119,7 +119,7 @@ namespace SignService
                 while (true)
                 {
                     lock (m_lcdNotifier)
-                        m_lcdNotifier.DrawText();
+                        m_lcdNotifier.DrawText(null);
 
                     System.Threading.Thread.Sleep(1000);
                 }

@@ -6,29 +6,32 @@ using System.Collections.ObjectModel;
 
 namespace Blinken
 {
-    public static class Alphabet
+    public static class AlphabetOld
     {
-        public static Letter Letters = new Letter(new byte[0,0]);
+        public static Letter Letters = Letter.Empty;
     }
 
-    // ripped from http://www.dafont.com/tiny.font
     public class Letter
     {
         public readonly byte [,] Data;
 
-        public Letter(byte [,] data)
+        public Letter(byte [,] data, bool rotate = true)
         {
-            // need to rotate 90 degrees to the right
-            var c0 = new byte[data.GetLength(1), data.GetLength(0)];
-            for (int c = 0; c < data.GetLength(0); c++)
+            if (rotate)
             {
-                for (int r = 0; r < data.GetLength(1); r++)
+                // need to rotate 90 degrees to the right
+                var c0 = new byte[data.GetLength(1), data.GetLength(0)];
+                for (int c = 0; c < data.GetLength(0); c++)
                 {
-                    c0[r, c] = data[c, r];
+                    for (int r = 0; r < data.GetLength(1); r++)
+                    {
+                        c0[r, c] = data[c, r];
+                    }
                 }
+                Data = c0;
             }
-
-            Data = c0;
+            else
+                Data = data;
         }
 
         public Letter this[char c]
@@ -105,11 +108,12 @@ namespace Blinken
                     case ' ':
                         return SPACE;
                     default:
-                        throw new Exception();
-                        //return null;
+                        return Empty;
                 }
             }
         }
+
+        public static Letter Empty = new Letter(new byte[0, 0]);
 
         public static Letter A = new Letter(new byte [,]
         {

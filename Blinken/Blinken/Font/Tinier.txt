@@ -1,0 +1,433 @@
+:'
+x
+
+: 
+
+
+
+ 
+
+:A
+ x
+x x
+x x
+
+:B
+xx
+xxx
+xx
+
+:C
+ xx
+x
+ xx
+
+:D
+xx
+x x
+xx
+
+:E
+xxx
+xx
+xxx
+
+:F
+xxx
+xx
+x
+
+:G
+x
+x x
+xxx
+
+:H
+x x
+xxx
+x x
+
+:I
+x
+x
+x
+
+:J
+ x
+ x
+x
+
+:K
+x x
+xx
+x x
+
+:L
+x
+x
+xx
+
+:M
+x   x
+xx xx
+x x x
+
+:N
+x  x
+xx x
+x xx
+
+:O
+ x
+x x
+ x
+ 
+:P
+xx
+xx
+x
+
+:Q
+xxx
+x x
+xxxx
+
+:R
+xx
+xx
+x x
+
+:S
+ xx
+ x
+xx
+
+:T
+xxx
+ x
+ x
+
+:U
+x x
+x x
+xxx
+
+:V
+x x
+x x
+ x
+
+:W
+x x x
+x x x
+ x x
+
+:X
+x x
+ x
+x x
+
+:Y
+x x
+ x
+ x
+
+:Z
+xx
+ x
+ xx
+
+:a
+ x
+x x
+x x
+
+:b
+xx
+xxx
+xx
+
+:c
+ xx
+x
+ xx
+
+:d
+xx
+x x
+xx
+
+:e
+xxx
+xx
+xxx
+
+:f
+xxx
+xx
+x
+
+:g
+x
+x x
+xxx
+
+:h
+x x
+xxx
+x x
+
+:i
+x
+x
+x
+
+:j
+ x
+ x
+x
+
+:k
+x x
+xx
+x x
+
+:l
+x
+x
+xx
+
+:m
+x   x
+xx xx
+x x x
+
+:n
+x  x
+xx x
+x xx
+
+:o
+ x
+x x
+ x
+ 
+:p
+xx
+xx
+x
+
+:q
+ x
+x x
+ xx
+
+:r
+xx
+xx
+x x
+
+:s
+ xx
+ x
+xx
+
+:t
+xxx
+ x
+ x
+
+:u
+x x
+x x
+xxx
+
+:v
+x x
+x x
+ x
+
+:w
+x x x
+x x x
+ x x
+
+:x
+x x
+ x
+x x
+
+:y
+x x
+ x
+ x
+
+:z
+xx
+ x
+ xx
+
+:0
+xxx
+x x
+xxx
+
+:1
+xx
+ x
+ x
+
+:2
+xx
+ x
+ xx
+ 
+:3
+xx
+ xx
+xx
+
+:4
+x x
+xxx
+  x
+
+:5
+ xx
+ x
+xx
+
+:6
+x
+xxx
+xxx
+
+:7
+xxx
+  x
+ x
+
+:8
+ xx
+xxx
+xx
+
+:9
+xxx
+xxx
+  x
+
+:+
+ x 
+xxx
+ x
+
+:-
+
+xx
+
+
+:*
+xx
+xx
+
+
+:/
+  x
+ x
+x
+
+:=
+xx
+
+xx
+
+:"
+x x
+
+"'
+x
+
+
+
+:&
+ x
+xxx
+ x
+
+:_
+
+
+xx
+
+:(
+ x
+x
+ x
+
+:)
+x
+ x
+x
+
+:,
+
+
+x
+
+:.
+
+
+x
+
+:;
+x
+
+x
+
+::
+x
+
+x
+
+:?
+xx
+  x
+ x
+
+:!
+x
+x
+
+
+:\
+x
+ x
+  x
+
+:|
+x
+x
+x
+
+:{
+ xx
+xx
+ xx
+
+:}
+xx
+ xx
+xx
+
+:[
+xx
+x
+xx
+
+:]
+xx
+ x
+xx
+
+
