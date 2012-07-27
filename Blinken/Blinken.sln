@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blinken", "Blinken\Blinken.csproj", "{4AD0FBED-C100-4535-8FF9-4E8ADD70DE33}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignController", "SignController\SignController.csproj", "{DD134147-9329-4D80-9235-2A53C3DE7542}"
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignService", "SignService\SignService.csproj", "{C198CEA0-FA5F-4993-9076-EEDB5D489C0A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignTextChanger", "SignTextChanger\SignTextChanger.csproj", "{E3FAF0C3-268F-4F3B-A35B-D1C04836B93A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RssLedSignController", "RssLedSignController\RssLedSignController.csproj", "{40CBE055-BE90-4856-B836-AE92DC35BAC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{E3FAF0C3-268F-4F3B-A35B-D1C04836B93A}.Debug|x86.Build.0 = Debug|x86
 		{E3FAF0C3-268F-4F3B-A35B-D1C04836B93A}.Release|x86.ActiveCfg = Release|x86
 		{E3FAF0C3-268F-4F3B-A35B-D1C04836B93A}.Release|x86.Build.0 = Release|x86
+		{40CBE055-BE90-4856-B836-AE92DC35BAC0}.Debug|x86.ActiveCfg = Debug|x86
+		{40CBE055-BE90-4856-B836-AE92DC35BAC0}.Debug|x86.Build.0 = Debug|x86
+		{40CBE055-BE90-4856-B836-AE92DC35BAC0}.Release|x86.ActiveCfg = Release|x86
+		{40CBE055-BE90-4856-B836-AE92DC35BAC0}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
