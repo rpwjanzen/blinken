@@ -77,7 +77,9 @@ namespace Blinken.Font
                 }
             }
 
-            font[ch] = new Letter(data, false);
+            if (font.m_letters.ContainsKey(ch))
+                Console.WriteLine("Replacing '{0}'", ch);
+            font[ch] = new Letter(data);
         }
     }
 }

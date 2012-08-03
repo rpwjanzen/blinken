@@ -31,6 +31,9 @@ namespace Blinken
 
         public void DrawText(LedFont font)
         {
+            if (font == null)
+                throw new ArgumentNullException("font");
+
             DoText(m_device, Text, font);
             System.Threading.Thread.Sleep(400);
         }
@@ -39,14 +42,9 @@ namespace Blinken
         {
             VirtualLcdScreen lcdScreen = new VirtualLcdScreen();
             List<Letter> characters;
-            if (font == null)
-                characters = text
-                    .Select(c => AlphabetOld.Letters[c])
-                    .ToList();
-            else
-                characters = text
-                    .Select(c => font[c])
-                    .ToList();
+            characters = text
+                .Select(c => font[c])
+                .ToList();
 
             int totalCharacterWidths = characters
                 .Aggregate(0, (acc, l) => l.Data.GetLength(0) + 1 + acc);
