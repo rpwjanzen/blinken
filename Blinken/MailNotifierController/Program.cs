@@ -66,10 +66,10 @@ namespace MailNotifierController
             byte newValue;
             if (b == 0)
                 newValue = 0;
-            else if (b < 128)
-                newValue = 1;
+            else if (b > 64)
+                newValue = 64;
             else
-                newValue = 33;
+                newValue = b;
 
             return newValue;
         }

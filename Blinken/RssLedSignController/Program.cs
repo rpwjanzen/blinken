@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Argotic.Syndication;
 using Blinken;
 using Blinken.Font;
@@ -26,10 +25,6 @@ namespace RssLedSignController
 
             while (true)
             {
-                //lcdNotifier.Text = ":::::";
-                //lcdNotifier.DrawText(font);
-                //System.Threading.Thread.Sleep(1000);
-
                 lock (m_allFeedLines)
                 {
                     for (int i = 0; i < m_allFeedLines.Count; i++)

@@ -2,7 +2,7 @@
 using System.ServiceModel;
 using System.ServiceModel.Description;
 
-namespace SignService
+namespace MailNotifierService
 {
     class Program
     {
@@ -10,12 +10,12 @@ namespace SignService
         {
             if (args.Length > 0)
             {
-                Uri baseAddress = new Uri("http://localhost:8000/ledsign/service");
-                ServiceHost serviceHost = new ServiceHost(new SignService(), baseAddress);
+                Uri baseAddress = new Uri("http://localhost:8002/mailnotifier/service");
+                ServiceHost serviceHost = new ServiceHost(new NotifierService(), baseAddress);
                 try
                 {
-                    // full service url is: http://localhost:8000/ledsign/service/ledsign
-                    serviceHost.AddServiceEndpoint(typeof(ISignService), new WSHttpBinding(SecurityMode.None), "ledsign");
+                    // full service url is: http://localhost:8002/mailnotifier/service/mailnotifier
+                    serviceHost.AddServiceEndpoint(typeof(IMailNotifierService), new WSHttpBinding(SecurityMode.None), "mailnotifier");
 
                     // create a mex behavior
                     ServiceMetadataBehavior smb = new ServiceMetadataBehavior()
@@ -40,20 +40,19 @@ namespace SignService
             }
             else
             {
-                Uri baseAddress = new Uri("http://localhost:8000/ledsign/service");
-                string address = "net.pipe://localhost/ledsign/sign";
+                Uri baseAddress = new Uri("http://localhost:8002/mailnotifier/service");
+                string address = "net.pipe://localhost/mailnotifier/sign";
 
-                // Create a ServiceHost for the CalculatorService type and provide the base address.
-                SignService signService = new SignService();
-                using (ServiceHost serviceHost = new ServiceHost(signService, baseAddress))
+                NotifierService mailNotifierService = new NotifierService();
+                using (ServiceHost serviceHost = new ServiceHost(mailNotifierService, baseAddress))
                 {
                     NetNamedPipeBinding binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
-                    serviceHost.AddServiceEndpoint(typeof(ISignService), binding, address);
+                    serviceHost.AddServiceEndpoint(typeof(IMailNotifierService), binding, address);
 
                     // Add a mex endpoint
                     ServiceMetadataBehavior smb = new ServiceMetadataBehavior();
                     smb.HttpGetEnabled = true;
-                    smb.HttpGetUrl = new Uri("http://localhost:8001/ledsign");
+                    smb.HttpGetUrl = new Uri("http://localhost:8003/mailnotifier");
                     serviceHost.Description.Behaviors.Add(smb);
 
                     long maxBufferPoolSize = binding.MaxBufferPoolSize;

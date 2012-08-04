@@ -26,7 +26,6 @@ namespace Blinken
 
                 byte[] init1 = { 0x00, 0x1f, 0x02, 0x00, 0x2e, 0x00, 0x00, 0x2b, 0x03 };
                 byte[] init2 = { 0x00, 0x00, 0x02, 0x00, 0x2e, 0x00, 0x00, 0x2b, 0x04 };
-                // not required?
                 byte[] init3 = { 0x00, 0x00, 0x02, 0x00, 0x2e, 0x00, 0x00, 0x2b, 0x05 };
 
                 WriteData(device, init1);
@@ -44,38 +43,44 @@ namespace Blinken
 
         public void DoFadeRed()
         {
-            WriteData(m_device, Color.FromArgb(0, 0, 0).ToNotifierColor().ToUsbData());
-            System.Threading.Thread.Sleep(500);
-
-            WriteData(m_device, Color.FromArgb(1, 0, 0).ToNotifierColor().ToUsbData());
-            System.Threading.Thread.Sleep(300);
-
-            WriteData(m_device, Color.FromArgb(33, 0, 0).ToNotifierColor().ToUsbData());
-            System.Threading.Thread.Sleep(1000);
+            for (int i = 0; i < NotifierColor.MaxColorValue; i+=2)
+            {
+                WriteData(m_device, Color.FromArgb((byte)i, 0, 0).ToNotifierColor().ToUsbData());
+                System.Threading.Thread.Sleep(25);
+            }
+            for (int i = NotifierColor.MaxColorValue; i >= 0; i-=2)
+            {
+                WriteData(m_device, Color.FromArgb((byte)i, 0, 0).ToNotifierColor().ToUsbData());
+                System.Threading.Thread.Sleep(25);
+            }
         }
 
         public void DoFadeBlue()
         {
-            WriteData(m_device, Color.FromArgb(0, 0, 0).ToNotifierColor().ToUsbData());
-            System.Threading.Thread.Sleep(500);
-
-            WriteData(m_device, Color.FromArgb(0, 0, 1).ToNotifierColor().ToUsbData());
-            System.Threading.Thread.Sleep(300);
-
-            WriteData(m_device, Color.FromArgb(0, 0, 33).ToNotifierColor().ToUsbData());
-            System.Threading.Thread.Sleep(1000);
+            for (int i = 0; i < NotifierColor.MaxColorValue; i+=2)
+            {
+                WriteData(m_device, Color.FromArgb(0, (byte)i, 0).ToNotifierColor().ToUsbData());
+                System.Threading.Thread.Sleep(25);
+            }
+            for (int i = NotifierColor.MaxColorValue; i >= 0; i-=2)
+            {
+                WriteData(m_device, Color.FromArgb(0, (byte)i, 0).ToNotifierColor().ToUsbData());
+                System.Threading.Thread.Sleep(25);
+            }
         }
 
         public void DoFadeGreen()
         {
-            WriteData(m_device, Color.FromArgb(0, 0, 0).ToNotifierColor().ToUsbData());
-            System.Threading.Thread.Sleep(500);
-
-            WriteData(m_device, Color.FromArgb(0, 1, 0).ToNotifierColor().ToUsbData());
-            System.Threading.Thread.Sleep(300);
-
-            WriteData(m_device, Color.FromArgb(0, 33, 0).ToNotifierColor().ToUsbData());
-            System.Threading.Thread.Sleep(1000);
+            for (int i = 0; i < NotifierColor.MaxColorValue; i+=2)
+            {
+                WriteData(m_device, Color.FromArgb(0, 0, (byte)i).ToNotifierColor().ToUsbData());
+                System.Threading.Thread.Sleep(25);
+            }
+            for (int i = NotifierColor.MaxColorValue; i >= 0; i-=2)
+            {
+                WriteData(m_device, Color.FromArgb(0, 0, (byte)i).ToNotifierColor().ToUsbData());
+                System.Threading.Thread.Sleep(25);
+            }
         }
 
         public void DoRainbow()
@@ -116,16 +121,13 @@ namespace Blinken
 
     public class NotifierColor
     {
-        public LightLevel Red;
-        public LightLevel Green;
-        public LightLevel Blue;
+        public byte Red;
+        public byte Green;
+        public byte Blue;
 
         public byte [] ToUsbData()
         {
-            byte red = GetLightLevelData(Red);
-            byte green = GetLightLevelData(Green);
-            byte blue = GetLightLevelData(Blue);
-            byte[] usbData = { 0x00, red, green, blue, 0x00, 0x00, 0x00, 0x00, 0x05 };
+            byte[] usbData = { 0x00, Red, Green, Blue, 0x00, 0x00, 0x00, 0x00, 0x05 };
 
             return usbData;
         }
@@ -137,24 +139,6 @@ namespace Blinken
             return usbData;
         }
 
-        private byte GetLightLevelData(LightLevel lightLevel)
-        {
-            switch (lightLevel)
-            {
-                case LightLevel.Off:
-                    return 0;
-                case LightLevel.Low:
-                    return 32;
-                case LightLevel.Mid:
-                    return 64;
-                case LightLevel.High:
-                    return 196;
-
-                default:
-                    return 0;
-            }
-        }
+        public static byte MaxColorValue { get { return 64; } }
     }
-
-    public enum LightLevel { Off, Low, Mid, High };
 }

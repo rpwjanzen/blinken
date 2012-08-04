@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual C# Express 2010
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blinken", "Blinken\Blinken.csproj", "{4AD0FBED-C100-4535-8FF9-4E8ADD70DE33}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignController", "SignController\SignController.csproj", "{DD134147-9329-4D80-9235-2A53C3DE7542}"
@@ -12,6 +12,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignTextChanger", "SignTextChanger\SignTextChanger.csproj", "{E3FAF0C3-268F-4F3B-A35B-D1C04836B93A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RssLedSignController", "RssLedSignController\RssLedSignController.csproj", "{40CBE055-BE90-4856-B836-AE92DC35BAC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailNotifierService", "MailNotifierService\MailNotifierService.csproj", "{DAD083CB-7AE8-41B9-8508-8145E4D6C963}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailNotifierChanger", "MailNotifierChanger\MailNotifierChanger.csproj", "{057F2A91-3182-41E6-A85A-25C4540A6C5C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +47,14 @@ Global
 		{40CBE055-BE90-4856-B836-AE92DC35BAC0}.Debug|x86.Build.0 = Debug|x86
 		{40CBE055-BE90-4856-B836-AE92DC35BAC0}.Release|x86.ActiveCfg = Release|x86
 		{40CBE055-BE90-4856-B836-AE92DC35BAC0}.Release|x86.Build.0 = Release|x86
+		{DAD083CB-7AE8-41B9-8508-8145E4D6C963}.Debug|x86.ActiveCfg = Debug|x86
+		{DAD083CB-7AE8-41B9-8508-8145E4D6C963}.Debug|x86.Build.0 = Debug|x86
+		{DAD083CB-7AE8-41B9-8508-8145E4D6C963}.Release|x86.ActiveCfg = Release|x86
+		{DAD083CB-7AE8-41B9-8508-8145E4D6C963}.Release|x86.Build.0 = Release|x86
+		{057F2A91-3182-41E6-A85A-25C4540A6C5C}.Debug|x86.ActiveCfg = Debug|x86
+		{057F2A91-3182-41E6-A85A-25C4540A6C5C}.Debug|x86.Build.0 = Debug|x86
+		{057F2A91-3182-41E6-A85A-25C4540A6C5C}.Release|x86.ActiveCfg = Release|x86
+		{057F2A91-3182-41E6-A85A-25C4540A6C5C}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

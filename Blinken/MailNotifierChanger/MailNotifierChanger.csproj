@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C198CEA0-FA5F-4993-9076-EEDB5D489C0A}</ProjectGuid>
+    <ProjectGuid>{057F2A91-3182-41E6-A85A-25C4540A6C5C}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SignService</RootNamespace>
-    <AssemblyName>SignService</AssemblyName>
+    <RootNamespace>MailNotifierChanger</RootNamespace>
+    <AssemblyName>MailNotifierChanger</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -36,6 +36,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -44,24 +46,47 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ISignService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SignService.cs" />
+    <Compile Include="Service References\MailNotifierService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Blinken\Blinken.csproj">
-      <Project>{4AD0FBED-C100-4535-8FF9-4E8ADD70DE33}</Project>
-      <Name>Blinken</Name>
+    <ProjectReference Include="..\MailNotifierService\MailNotifierService.csproj">
+      <Project>{DAD083CB-7AE8-41B9-8508-8145E4D6C963}</Project>
+      <Name>MailNotifierService</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Font\Tiny.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <None Include="app.config" />
+    <None Include="Service References\MailNotifierService\mailnotifier.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MailNotifierService\mailnotifier1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MailNotifierService\NotifierService.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\MailNotifierService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MailNotifierService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MailNotifierService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MailNotifierService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

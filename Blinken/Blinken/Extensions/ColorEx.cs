@@ -6,8 +6,9 @@ namespace Blinken.Extensions
     public static class ColorEx
     {
         public static List<NotifierColor> AllColors = new List<NotifierColor>();
-        private const byte High = 33;
-        private const byte Low = 1;
+        private const byte High = 64;
+        private const byte Mid = 48;
+        private const byte Low = 32;
         private const byte Off = 0;
 
         static ColorEx()
@@ -54,16 +55,14 @@ namespace Blinken.Extensions
             return notifierColor;
         }
 
-        private static LightLevel GetBucketValue(byte b)
+        private static byte GetBucketValue(byte b)
         {
             if (b <= 0)
-                return LightLevel.Off;
-            if (b <= 32)
-                return LightLevel.Low;
-            if (b <= 64)
-                return LightLevel.Mid;
-            
-            return LightLevel.High;
+                return 0;
+            if (b < NotifierColor.MaxColorValue)
+                return b;
+
+            return NotifierColor.MaxColorValue;
         }
     }
 }

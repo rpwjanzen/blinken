@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="d5325000-f118-4b49-a96a-5e137553bb0f" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8003/mailnotifier" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="mailnotifier.xsd" MetadataType="Schema" ID="6bc76c92-4557-437e-b90e-167751c617e7" SourceId="1" SourceUrl="http://localhost:8003/mailnotifier?xsd=xsd0" />
+    <MetadataFile FileName="NotifierService.wsdl" MetadataType="Wsdl" ID="a2ea49c5-503b-4fd7-b57d-65c1a671d926" SourceId="1" SourceUrl="http://localhost:8003/mailnotifier" />
+    <MetadataFile FileName="mailnotifier1.xsd" MetadataType="Schema" ID="c56db085-fbb2-43f5-a083-c348c7bb43f4" SourceId="1" SourceUrl="http://localhost:8003/mailnotifier?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
