@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MailNotifierChanger.MailNotifierService {
+namespace MailNotifierClient.MailNotifierService {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -23,12 +23,12 @@ namespace MailNotifierChanger.MailNotifierService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IMailNotifierServiceChannel : MailNotifierChanger.MailNotifierService.IMailNotifierService, System.ServiceModel.IClientChannel {
+    public interface IMailNotifierServiceChannel : MailNotifierClient.MailNotifierService.IMailNotifierService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class MailNotifierServiceClient : System.ServiceModel.ClientBase<MailNotifierChanger.MailNotifierService.IMailNotifierService>, MailNotifierChanger.MailNotifierService.IMailNotifierService {
+    public partial class MailNotifierServiceClient : System.ServiceModel.ClientBase<MailNotifierClient.MailNotifierService.IMailNotifierService>, MailNotifierClient.MailNotifierService.IMailNotifierService {
         
         public MailNotifierServiceClient() {
         }

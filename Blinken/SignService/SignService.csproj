@@ -50,13 +50,10 @@
     <Compile Include="SignService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Blinken\Blinken.csproj">
+    <ProjectReference Include="..\Blinken\LedSignLib.csproj">
       <Project>{4AD0FBED-C100-4535-8FF9-4E8ADD70DE33}</Project>
-      <Name>Blinken</Name>
+      <Name>LedSignLib</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Font\Tiny.txt">

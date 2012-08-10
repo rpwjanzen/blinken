@@ -14,6 +14,7 @@ namespace SignController
         static void Main(string[] args)
         {
             var lcdNotifier = new LcdNotifier();
+            LedFont tinyFony = LedFont.LoadFromFile(@"Font\Tiny.txt");
             LedFont tinierFony = LedFont.LoadFromFile(@"Font\Tinier.txt");
             LedFont somyFont = LedFont.LoadFromFile(@"Font\somybmp04_7.txt");
 
@@ -48,10 +49,10 @@ namespace SignController
                 for (int i = 0; i < lines.Length; i++)
                 {
                     lcdNotifier.Text = lines[i].ToUpper();
-                    if (i % 2 == 0)
-                        lcdNotifier.DrawText(tinierFony);
-                    else
-                        lcdNotifier.DrawText(somyFont);
+                    //if (i % 2 == 0)
+                    //    lcdNotifier.DrawText(tinierFony);
+                    //else
+                    lcdNotifier.DrawText(tinyFony);
                     System.Threading.Thread.Sleep(1000);
                 }
             }

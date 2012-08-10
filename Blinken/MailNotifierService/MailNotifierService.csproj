@@ -51,9 +51,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Blinken\Blinken.csproj">
-      <Project>{4AD0FBED-C100-4535-8FF9-4E8ADD70DE33}</Project>
-      <Name>Blinken</Name>
+    <ProjectReference Include="..\MailNotifierLib\MailNotifierLib.csproj">
+      <Project>{0AF352F7-5CAD-447D-B6A0-3EF24B76FC61}</Project>
+      <Name>MailNotifierLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

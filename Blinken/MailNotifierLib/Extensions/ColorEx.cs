@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Collections.Generic;
 
-namespace Blinken.Extensions
+namespace MailNotifierLib.Extensions
 {
     public static class ColorEx
     {

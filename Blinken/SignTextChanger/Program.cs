@@ -1,7 +1,7 @@
 ﻿using System.ServiceModel;
 using System;
 
-namespace SignTextChanger
+namespace SignTextClient
 {
     class Program
     {

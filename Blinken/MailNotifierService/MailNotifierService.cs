@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.ServiceModel;
 using System.Threading;
-using Blinken;
+using MailNotifierLib;
 
 namespace MailNotifierService
 {

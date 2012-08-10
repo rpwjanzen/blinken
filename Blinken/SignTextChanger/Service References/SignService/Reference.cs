@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SignTextChanger.SignService {
+namespace SignTextClient.SignService {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -20,12 +20,12 @@ namespace SignTextChanger.SignService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ISignServiceChannel : SignTextChanger.SignService.ISignService, System.ServiceModel.IClientChannel {
+    public interface ISignServiceChannel : SignTextClient.SignService.ISignService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class SignServiceClient : System.ServiceModel.ClientBase<SignTextChanger.SignService.ISignService>, SignTextChanger.SignService.ISignService {
+    public partial class SignServiceClient : System.ServiceModel.ClientBase<SignTextClient.SignService.ISignService>, SignTextClient.SignService.ISignService {
         
         public SignServiceClient() {
         }

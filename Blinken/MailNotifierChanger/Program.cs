@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.ServiceModel;
 using System.Drawing;
-using MailNotifierChanger.MailNotifierService;
+using MailNotifierClient.MailNotifierService;
 
-namespace MailNotifierChanger
+namespace MailNotifierClient
 {
     class Program
     {

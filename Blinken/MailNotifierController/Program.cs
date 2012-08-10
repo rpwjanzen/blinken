@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Drawing;
-using Blinken;
+using MailNotifierLib;
 
 namespace MailNotifierController
 {
@@ -29,7 +29,7 @@ namespace MailNotifierController
             {
                 var mailNotifier = new MailNotifier();
                 Console.WriteLine("Rainbow!");
-                mailNotifier.DoRainbow();
+                //mailNotifier.DoRainbow();
             }
             else if (args[0] == "fade")
             {
@@ -37,11 +37,11 @@ namespace MailNotifierController
                 var mailNotifier = new MailNotifier();
                 while (true)
                 {
-                    mailNotifier.DoFadeRed();
+                    mailNotifier.DoFadeTo(Color.Red);
                     System.Threading.Thread.Sleep(150);
-                    mailNotifier.DoFadeGreen();
+                    mailNotifier.DoFadeTo(Color.Blue);
                     System.Threading.Thread.Sleep(150);
-                    mailNotifier.DoFadeBlue();
+                    mailNotifier.DoFadeTo(Color.Green);
                     System.Threading.Thread.Sleep(150);
                 }
             }
