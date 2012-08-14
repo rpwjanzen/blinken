@@ -9,6 +9,7 @@ namespace SignTextClient
         {
             if (args.Length != 1)
                 return;
+
             try
             {
                 const string uriText = "net.pipe://localhost/ledsign/sign";

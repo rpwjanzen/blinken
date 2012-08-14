@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailNotifierClient", "MailN
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailNotifierLib", "MailNotifierLib\MailNotifierLib.csproj", "{0AF352F7-5CAD-447D-B6A0-3EF24B76FC61}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinecraftLedSign", "MinecraftLedSign\MinecraftLedSign.csproj", "{D12B7FC5-2129-4F86-8A26-8AFD6F4289CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -119,6 +121,16 @@ Global
 		{0AF352F7-5CAD-447D-B6A0-3EF24B76FC61}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{0AF352F7-5CAD-447D-B6A0-3EF24B76FC61}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{0AF352F7-5CAD-447D-B6A0-3EF24B76FC61}.Release|x86.ActiveCfg = Release|Any CPU
+		{D12B7FC5-2129-4F86-8A26-8AFD6F4289CB}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{D12B7FC5-2129-4F86-8A26-8AFD6F4289CB}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{D12B7FC5-2129-4F86-8A26-8AFD6F4289CB}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{D12B7FC5-2129-4F86-8A26-8AFD6F4289CB}.Debug|x86.ActiveCfg = Debug|x86
+		{D12B7FC5-2129-4F86-8A26-8AFD6F4289CB}.Debug|x86.Build.0 = Debug|x86
+		{D12B7FC5-2129-4F86-8A26-8AFD6F4289CB}.Release|Any CPU.ActiveCfg = Release|x86
+		{D12B7FC5-2129-4F86-8A26-8AFD6F4289CB}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{D12B7FC5-2129-4F86-8A26-8AFD6F4289CB}.Release|Mixed Platforms.Build.0 = Release|x86
+		{D12B7FC5-2129-4F86-8A26-8AFD6F4289CB}.Release|x86.ActiveCfg = Release|x86
+		{D12B7FC5-2129-4F86-8A26-8AFD6F4289CB}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -15,7 +15,7 @@ namespace SignService
             m_lcdNotifier = new LcdNotifier();
             m_lcdNotifier.Text = "GTG!";
 
-            LedFont font = LedFont.LoadFromFile(@"Font\Tiny.txt");
+            LedFont font = LedFont.LoadFromFile(@"Font\MyTiny.txt");
 
             Thread thread = new Thread(new ThreadStart(() =>
             {

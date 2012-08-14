@@ -1,0 +1,320 @@
+﻿: 
+       
+
+:A
+ xxxxx
+x     x
+xxxxxxx
+x     x
+x     x
+
+:B
+xxxxxx
+x     x
+xxxxxxx
+x     x
+xxxxxx
+
+:C
+ xxxxxx
+x
+x
+x
+ xxxxxx
+ 
+:D
+xxxxxx
+x     x
+x     x
+x     x
+xxxxxx
+
+:E
+ xxxxxx
+x
+xxxxxxx
+x
+ xxxxxx
+
+:F
+ xxxxxx
+x
+xxxxxxx
+x
+x
+
+:G
+ xxxxxx
+x
+x   xxx
+x     x
+ xxxxx
+ 
+:H
+x     x
+x     x
+xxxxxxx
+x     x
+x     x
+
+:I
+xxx
+ x
+ x
+ x
+xxx
+
+:J
+     xx
+      x
+      x
+x     x
+ xxxxx
+
+:K
+x     x
+x     x
+xxxxxx
+x     x
+x     x
+
+:L
+x
+x
+x
+x
+ xxxxxx
+
+:M
+xx   xx
+x x x x
+x  x  x
+x     x
+x     x
+
+:N
+xx    x
+x x   x
+x  x  x
+x   x x
+x    xx
+
+:O
+ xxxxx
+x     x
+x     x
+x     x
+ xxxxx
+
+:P
+ xxxxx
+x     x
+xxxxxx
+x
+x
+
+:Q
+ xxxxx
+x     x
+x   xxx
+x   x x
+ xxxxx
+
+:R
+ xxxxx
+x     x
+xxxxxx
+x     x
+x     x
+
+:S
+ xxxxxx
+x
+xxxxxxx
+      x
+xxxxxx
+
+:T
+xxxxxxx
+   x
+   x
+   x
+   x
+
+:U
+x     x
+x     x
+x     x
+x     x
+ xxxxx
+
+:V
+x     x
+x     x
+ x   x
+  x x
+   x
+
+:W
+x  x  x
+x  x  x
+x  x  x
+ x x x
+  x x
+
+:X
+xx   xx
+  x x
+   x
+  x x
+xx   xx
+
+:Y
+x     x
+ x   x
+  x x
+   x
+   x
+
+:Z
+xxxxxxx
+    x
+   x
+  x
+xxxxxxx
+
+
+
+:0
+ xxxxx
+x     x
+x     x
+x     x
+ xxxxx
+
+:1
+ x
+xx
+ x
+ x
+ x
+
+:2
+xxxxxx
+      x
+ xxxxx
+x
+xxxxxxx
+
+:3
+xxxxxx
+      x
+xxxxxx
+      x
+xxxxxx
+
+:4
+x    x
+x    x
+x    x
+ xxxxxx
+     x
+
+:5
+xxxxxxx
+x
+xxxxxx
+      x
+xxxxxx
+
+:6
+ xxxx
+x
+xxxxxx
+x     x
+ xxxxx
+
+:7
+xxxxxxx
+      x
+     x
+    x
+   x
+
+:8
+ xxxxx
+x     x
+ xxxxx
+x     x
+ xxxxx
+ 
+:9
+ xxxxx
+x     x
+ xxxxxx
+      x
+ xxxxx
+
+:'
+x
+x
+
+::
+
+x
+
+x
+
+:;
+
+x
+
+x
+x
+
+:?
+xxxxxxx
+x     x
+   xxxx
+   
+   x
+
+:!
+x
+x
+x
+
+x
+
+:,
+
+
+
+x
+x
+
+:.
+
+
+
+
+x
+
+ 
+:*
+xx x xx
+  xxx
+   x
+  xxx
+xx   xx
+
+:"
+ x x
+x x
+
+:%
+xx   x
+x   x
+   x
+  x   x
+ x   xx
