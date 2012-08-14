@@ -30,7 +30,7 @@ namespace RssLedSignController
                     for (int i = 0; i < m_allFeedLines.Count; i++)
                     {
                         lcdNotifier.Text = m_allFeedLines[i].ToUpper();
-                        lcdNotifier.DrawText(font);
+                        lcdNotifier.ScrollText(font);
                         System.Threading.Thread.Sleep(1000);
                     }
                 }

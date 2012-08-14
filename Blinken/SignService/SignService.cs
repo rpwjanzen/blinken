@@ -43,7 +43,7 @@ namespace SignService
                 fonts.Add(font);
             }
 
-            var displayFont = fonts[3];
+            var displayFont = fonts[0];
 
             m_lcdNotifier.Text = testPattern;
 
@@ -53,7 +53,7 @@ namespace SignService
                 {
                     lock (m_lcdNotifier)
                     {
-                        m_lcdNotifier.DrawText(displayFont);
+                        m_lcdNotifier.ScrollText(displayFont);
                     }
                 }
             }));

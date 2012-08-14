@@ -49,7 +49,7 @@ namespace SignController
                 for (int i = 0; i < lines.Length; i++)
                 {
                     lcdNotifier.Text = lines[i];
-                    lcdNotifier.DrawText(tinyFony);
+                    lcdNotifier.ScrollText(tinyFony);
                     System.Threading.Thread.Sleep(1000);
                 }
             }

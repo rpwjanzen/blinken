@@ -14,6 +14,9 @@ namespace Blinken
 
         public readonly bool[,] Data = new bool[Width, Height];
 
+        /// <summary>
+        /// Blits to the source to the LED screen position specified by the upper left point.
+        /// </summary>
         public void Blit(bool[,] source, Point upperLeft)
         {
             int sc = 0;

@@ -26,16 +26,15 @@ namespace Blinken
 
         public string Text;
 
-        public void DrawText(LedFont font)
+        public void ScrollText(LedFont font)
         {
             if (font == null)
                 throw new ArgumentNullException("font");
 
-            DoText(m_device, Text ?? string.Empty, font);
-            System.Threading.Thread.Sleep(400);
+            ScrollText(m_device, Text ?? string.Empty, font);
         }
 
-        private static void DoText(HidDevice device, string text, LedFont font)
+        private static void ScrollText(HidDevice device, string text, LedFont font)
         {
             VirtualLcdScreen lcdScreen = new VirtualLcdScreen();
             List<Letter> characters;
@@ -72,6 +71,7 @@ namespace Blinken
                 //upperLeft.Y = upperLeft.Y + 2;
 
                 // blit letter contents
+                //lcdScreen.Blit(c.Data, new Rectangle(Point.Empty, new Size(c.Data.GetLength(0), c.Data.GetLength(1))), new Point(upperLeft.X, upperLeft.Y));
                 lcdScreen.Blit(c.Data, upperLeft);
 
                 //// blit lower border

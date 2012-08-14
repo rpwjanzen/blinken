@@ -37,52 +37,42 @@ namespace Blinken
             m_data = new bool[21, 7];
         }
 
-        private bool[,] GetEnlargedLcdScreen(int newWidth, int newHeight)
+        /// <summary>
+        /// Blits to the source to the LED screen position specified by the upper left point.
+        /// </summary>
+        public void Blit(bool[,] source, Point targetUpperLeft)
         {
-            bool[,] newData = new bool[newWidth, newHeight];
-
-            for (int c = 0; c < Data.GetLength(0); c++)
+            for (int sourceColumn = 0; sourceColumn < source.GetLength(0); sourceColumn++)
             {
-                for (int r = 0; r < Data.GetLength(1); r++)
+                for (int sourceRow = 0; sourceRow < source.GetLength(1); sourceRow++)
                 {
-                    newData[c, r] = Data[c, r];
-                }
-            }
-
-            return newData;
-        }
-
-        private bool[,] GetShrunkLcdScreen(int newWidth, int newHeight)
-        {
-            bool[,] newData = new bool[newWidth, newHeight];
-
-            for (int c = 0; c < newWidth; c++)
-            {
-                for (int r = 0; r < newHeight; r++)
-                {
-                    newData[c, r] = Data[c, r];
-                }
-            }
-
-            return newData;
-        }
-
-        public void Blit(bool[,] source, Point upperLeft)
-        {
-            int sc = 0;
-            for (int c = 0; c < source.GetLength(0); c++)
-            {
-                int sr = 0;
-                for (int r = 0; r < source.GetLength(1); r++)
-                {
-                    if (c + upperLeft.X < Data.GetLength(0)
-                        && r + upperLeft.Y < Data.GetLength(1))
+                    int targetColumn = sourceColumn + targetUpperLeft.X;
+                    int targetRow = sourceRow + targetUpperLeft.Y;
+                    if (targetColumn < Data.GetLength(0)
+                        && targetRow < Data.GetLength(1))
                     {
-                        Data[c + upperLeft.X, r + upperLeft.Y] = source[sc, sr];
+                        Data[targetColumn, targetRow] = source[sourceColumn, sourceRow];
                     }
-                    sr++;
                 }
-                sc++;
+            }
+        }
+
+        public void Blit(bool[,] source, Rectangle sourceRectangle, Point targetUpperLeft)
+        {
+            for (int sourceColumn = sourceRectangle.Left; sourceColumn < source.GetLength(0) && sourceColumn < sourceRectangle.Right; sourceColumn++)
+            {
+                for (int sourceRow = sourceRectangle.Top; sourceRow < source.GetLength(1) && sourceRow < sourceRectangle.Bottom; sourceRow++)
+                {
+                    int targetColumn = sourceColumn + sourceRectangle.Left + targetUpperLeft.X;
+                    int targetRow = sourceRow + sourceRectangle.Top + targetUpperLeft.Y;
+                    if (targetColumn < Data.GetLength(0)
+                        && targetRow < Data.GetLength(1)
+                        && targetColumn > -1
+                        && targetRow > -1)
+                    {
+                        Data[targetColumn, targetRow] = source[sourceColumn, sourceRow];
+                    }
+                }
             }
         }
 
@@ -133,6 +123,36 @@ namespace Blinken
             }
 
             return bytes;
+        }
+
+        private bool[,] GetEnlargedLcdScreen(int newWidth, int newHeight)
+        {
+            bool[,] newData = new bool[newWidth, newHeight];
+
+            for (int c = 0; c < Data.GetLength(0); c++)
+            {
+                for (int r = 0; r < Data.GetLength(1); r++)
+                {
+                    newData[c, r] = Data[c, r];
+                }
+            }
+
+            return newData;
+        }
+
+        private bool[,] GetShrunkLcdScreen(int newWidth, int newHeight)
+        {
+            bool[,] newData = new bool[newWidth, newHeight];
+
+            for (int c = 0; c < newWidth; c++)
+            {
+                for (int r = 0; r < newHeight; r++)
+                {
+                    newData[c, r] = Data[c, r];
+                }
+            }
+
+            return newData;
         }
     }
 }
