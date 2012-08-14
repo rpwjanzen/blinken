@@ -48,10 +48,7 @@ namespace SignController
             {
                 for (int i = 0; i < lines.Length; i++)
                 {
-                    lcdNotifier.Text = lines[i].ToUpper();
-                    //if (i % 2 == 0)
-                    //    lcdNotifier.DrawText(tinierFony);
-                    //else
+                    lcdNotifier.Text = lines[i];
                     lcdNotifier.DrawText(tinyFony);
                     System.Threading.Thread.Sleep(1000);
                 }

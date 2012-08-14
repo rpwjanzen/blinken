@@ -1,0 +1,637 @@
+﻿: 
+
+
+:A
+xxxxx
+x   x
+xxxxx
+x   x
+x   x
+
+:B
+xxxx
+x   x
+xxxx
+x   x
+xxxx
+
+:C
+xxxxx
+x   x
+x
+x   x
+xxxxx
+
+:D
+xxxx
+x   x
+x   x
+x   x
+xxxx
+
+:E
+xxxxx
+x
+xxxxx
+x
+xxxxx
+
+:F
+xxxxx
+x
+xxxxx
+x
+x
+
+:G
+xxxxx
+x
+x  xx
+x   x
+xxxxx
+
+:H
+x   x
+x   x
+xxxxx
+x   x
+x   x
+
+:I
+xxx
+ x
+ x
+ x
+xxx
+
+:J
+   xx
+    x
+	x
+x   x
+xxxxx
+
+:K
+x   x
+x  x
+xxx
+x  x
+x   x
+
+:L
+x
+x
+x
+x
+xxxxx
+
+:M
+x   x
+xx xx
+x x x
+x   x
+x   x
+
+:N
+x   x
+xx  x
+x x x
+x  xx
+x   x
+
+:O
+xxxxx
+x   x
+x   x
+x   x
+xxxxx
+
+:P
+xxxxx
+x   x
+xxxxx
+x
+x
+
+:Q
+xxxxx
+x   x
+x   x
+x  xx
+xxxxx
+
+:R
+xxxxx
+x   x
+xxxxx
+x  x
+x   x
+
+:S
+xxxxx
+x
+xxxxx
+    x
+xxxxx
+
+:T
+xxxxx
+  x
+  x
+  x
+  x
+
+:U
+x   x
+x   x
+x   x
+x   x
+xxxxx
+
+:V
+x   x
+x   x
+x   x
+ x x
+  x
+
+:W
+x x x
+x x x
+x x x
+x x x
+ x x
+
+:X
+x   x
+ x x
+  x
+ x x
+x   x
+
+:Y
+x   x
+x   x
+ x x
+  x
+  x
+
+:Z
+xxxxx
+   x
+  x
+ x
+xxxxx
+
+:a
+
+ xxxx
+x   x
+x   x
+ xxxx
+
+:b
+x
+xxxx
+x   x
+x   x
+xxxx
+
+:c
+
+xxxxx
+x
+x
+xxxxx
+
+:d
+    x
+ xxxx
+x   x
+ xxxx
+
+:e
+ xxx
+x  xx
+xx
+ xxxx
+
+:f
+  xxx
+ x
+xxxxx
+ x
+ x
+
+:g
+
+xxxxx
+x   x
+x   x
+xxxxx
+    x
+  xxx
+
+:h
+x
+xxxxx
+x   x
+x   x
+x   x
+
+:i
+x
+
+x
+x
+x
+
+:j
+  x
+
+  x
+  x
+  x
+  x
+xx
+
+:k
+x
+x  xx
+xxx
+x  x
+x   x
+
+:l
+x
+x
+x
+x
+x
+
+:m
+
+xxxxx
+x x x
+x x x
+x x x
+
+:n
+
+xxxxx
+x   x
+x   x
+x   x
+
+:o
+
+xxxxx
+x   x
+x   x
+xxxxx
+
+:p
+
+xxxxx
+x   x
+x   x
+xxxxx
+x
+x
+
+:q
+
+xxxxx
+x   x
+x   x
+xxxxx
+    x
+	x
+
+:r
+
+xxxxx
+x
+x
+x
+
+:s
+
+ xxxx
+xx
+  xxx
+xxx
+
+:t
+ x
+xxx
+ x
+ x
+  x
+
+:u
+
+x   x
+x   x
+x   x
+xxxxx
+
+:v
+
+x   x
+x   x
+ x x
+  x
+
+:w
+
+x x x
+x x x
+x x x
+ x x
+
+:x
+
+xx xx
+  x
+  x
+xx xx
+
+:y
+
+x   x
+x   x
+x   x
+xxxxx
+    x
+  xxx
+
+:z
+
+xxxx
+  x
+ x
+xxxx
+
+:0
+ xxx
+x   x
+x   x
+x   x
+ xxx
+
+:1
+xx
+ x
+ x
+ x
+xxx
+
+:2
+xxxxx
+    x
+xxxxx
+x
+xxxxx
+
+:3
+xxxxx
+    x
+xxxxx
+    x
+xxxxx
+
+:4
+x  x
+x  x
+x  x
+xxxxx
+   x
+
+:5
+xxxxx
+x
+xxxxx
+    x
+xxxxx
+
+:6
+xxxxx
+x
+xxxxx
+x   x
+xxxxx
+
+:7
+xxxxx
+    x
+   x
+  x
+ x
+
+:8
+xxxxx
+x   x
+xxxxx
+x   x
+xxxxx
+
+:9
+xxxxx
+x   x
+xxxxx
+    x
+xxxxx
+
+:$
+xxxxx
+x x
+xxxxx
+  x x
+xxxxx
+
+:+
+  x
+  x
+xxxxx
+  x
+  x
+
+:-
+
+
+xxxxx
+
+:*
+x x x
+ xxx
+  x
+ xxx
+x x x
+
+:/
+    x
+   x
+  x
+ x
+x
+
+:=
+
+xxxxx
+
+xxxxx
+
+:%
+xx  x
+x  x
+  x
+ x  x
+x  xx
+
+:"
+ x x
+x x
+
+:'
+x
+x
+
+:#
+ x x
+xxxxx
+ x x
+xxxxx
+ x x
+
+:@
+xxxxx
+x   x
+x xxx
+x x x
+xx xx
+
+:&
+ xx
+x  x
+ xx
+x  x
+ xx x
+
+:_
+
+
+
+
+xxxxx
+
+:(
+ x
+x
+x
+x
+ x
+
+:)
+x
+ x
+ x
+ x
+x
+
+:,
+
+
+
+x
+x
+
+:.
+
+
+
+
+x
+
+:?
+xxxxx
+    x
+ xxxx
+
+ x
+
+:!
+x
+x
+x
+
+x
+
+:\
+x
+ x
+  x
+   x
+    x
+
+:|
+x
+x
+x
+x
+x
+
+:{
+ xx
+ x
+xx
+ x
+ xx
+
+:}
+xx
+ x
+ xx
+ x
+xx
+
+:<
+  x
+ x
+x
+ x
+  x
+
+:>
+x
+ x
+  x
+ x
+x
+
+:[
+xx
+x
+x
+x
+xx
+
+:]
+xx
+ x
+ x
+ x
+xx
+
+:`
+x
+ x
+
+:^
+ x
+x x
+
+:~
+ x x
+x x
+

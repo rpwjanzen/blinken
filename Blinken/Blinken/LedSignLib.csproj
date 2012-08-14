@@ -51,29 +51,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BitUtil.cs" />
-    <Compile Include="Font\LedFont.cs" />
+    <Compile Include="Font\LedFont.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="LcdNotifier.cs" />
     <Compile Include="LcdScreen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TinyFont.cs" />
+    <Compile Include="Letter.cs" />
     <Compile Include="VirtualLcdScreen.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Font\Font Sources.txt">
+    <Content Include="Font\Font Sources.txt" />
+    <Content Include="Font\somybmp01_7.txt" />
+    <Content Include="Font\somybmp02_7.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Font\somybmp01_7.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Font\somybmp04_7.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Font\Tinier.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Font\Tiny.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Font\somybmp04_7.txt" />
+    <Content Include="Font\Tinier.txt" />
+    <Content Include="Font\Tiny.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
