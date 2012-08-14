@@ -9,7 +9,7 @@ namespace RssLedSignController
 {
     class Program
     {
-        private static RssFeed m_forecastFeed;
+        private static RssFeed m_feed;
 
         private static List<string> m_forecastFeedLines = new List<string>();
         private static List<string> m_allFeedLines = new List<string>();
@@ -19,9 +19,9 @@ namespace RssLedSignController
             var lcdNotifier = new LcdNotifier();
             LedFont font = LedFont.LoadFromFile(@"Font\Tiny.txt");
 
-            m_forecastFeed = new RssFeed();
-            m_forecastFeed.Loaded += forecastFeed_Loaded;
-            m_forecastFeed.LoadAsync(new Uri("http://www.weatheroffice.gc.ca/rss/city/ab-52_e.xml"), null);
+            m_feed = new RssFeed();
+            m_feed.Loaded += feed_Loaded;
+            m_feed.LoadAsync(new Uri("http://feeds.huffingtonpost.com/HP/MostPopular"), null);
 
             while (true)
             {
@@ -29,29 +29,32 @@ namespace RssLedSignController
                 {
                     for (int i = 0; i < m_allFeedLines.Count; i++)
                     {
-                        lcdNotifier.Text = m_allFeedLines[i].ToUpper();
+                        lcdNotifier.Text = m_allFeedLines[i];
                         lcdNotifier.ScrollText(font);
-                        System.Threading.Thread.Sleep(1000);
                     }
                 }
+
+                System.Threading.Thread.Sleep(1000);
             }
         }
 
-        private static void forecastFeed_Loaded(object sender, Argotic.Common.SyndicationResourceLoadedEventArgs e)
+        private static void feed_Loaded(object sender, Argotic.Common.SyndicationResourceLoadedEventArgs e)
         {
             List<string[]> allLines = new List<string[]>();
-            foreach (var rssItem in m_forecastFeed.Channel.Items)
+            foreach (var rssItem in m_feed.Channel.Items)
             {
-                string[] itemLines = rssItem.Description.Split('\n');
-                for (int i = 0; i < itemLines.Length; i++)
-                {
-                    string line = itemLines[i];
-                    line = RemoveHtml(line);
+                //string[] descriptionLines = rssItem.Description.Split('\n');
+                //for (int i = 0; i < descriptionLines.Length; i++)
+                //{
+                //    string line = descriptionLines[i];
+                //    line = RemoveHtml(line);
 
-                    itemLines[i] = line.Trim();
-                }
+                //    descriptionLines[i] = line.Trim();
+                //}
 
-                allLines.Add(itemLines);
+                string title = rssItem.Title;
+                title = RemoveHtml(title);
+                allLines.Add(new string [] { title });
             }
 
             lock (m_forecastFeedLines)
@@ -71,19 +74,45 @@ namespace RssLedSignController
             }
 
             line = line.Replace("&deg;", "*");
+            line = line.Replace("&lt;", "<");
+            line = line.Replace("&gt;", ">");
+            line = line.Replace("&amp;", "&");
+
+            // huffington post feed
+            line = line.Replace("![CDATA[", "");
+            line = line.Replace("]]", "");
+
+            line = line.Replace("<&>", "&");
+            line = line.Replace("PHOTOS", "");
+            line = line.Replace("PHOTO", "");
+            line = line.Replace("LIVE UPDATES", "");
+            line = line.Replace("VIDEO", "");
+            line = line.Replace("POLL", "");
+            line = line.Replace("()", "");
+            line = line.Replace("(, )", "");
+            line = line.Replace("(, , )", "");
+
             return line;
         }
 
         private static void UpdateAllFeedLines()
         {
+            List<string> linesCopy;
             lock (m_allFeedLines)
             {
                 lock (m_forecastFeedLines)
                 {
                     m_allFeedLines.Clear();
                     m_allFeedLines.AddRange(m_forecastFeedLines);
+                    linesCopy = m_allFeedLines.ToList();
                 }
             }
+
+            Console.WriteLine("Begin updated RSS feed...");
+            foreach (var s in linesCopy)
+                Console.WriteLine(s);
+            Console.WriteLine("End updated RSS feed.");
+
         }
     }
 }
