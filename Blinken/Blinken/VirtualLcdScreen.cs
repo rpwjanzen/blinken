@@ -26,20 +26,20 @@ namespace Blinken
             get { return Data.GetLength(1); }
         }
 
-        private byte[,] m_data;
-        public byte[,] Data
+        private bool[,] m_data;
+        public bool[,] Data
         {
             get { return m_data; }
         }
 
         public VirtualLcdScreen()
         {
-            m_data = new byte[21, 7];
+            m_data = new bool[21, 7];
         }
 
-        private byte [,] GetEnlargedLcdScreen(int newWidth, int newHeight)
+        private bool[,] GetEnlargedLcdScreen(int newWidth, int newHeight)
         {
-            byte[,] newData = new byte [newWidth,newHeight];
+            bool[,] newData = new bool[newWidth, newHeight];
 
             for (int c = 0; c < Data.GetLength(0); c++)
             {
@@ -52,9 +52,9 @@ namespace Blinken
             return newData;
         }
 
-        private byte[,] GetShrunkLcdScreen(int newWidth, int newHeight)
+        private bool[,] GetShrunkLcdScreen(int newWidth, int newHeight)
         {
-            byte[,] newData = new byte[newWidth, newHeight];
+            bool[,] newData = new bool[newWidth, newHeight];
 
             for (int c = 0; c < newWidth; c++)
             {
@@ -67,7 +67,7 @@ namespace Blinken
             return newData;
         }
 
-        public void Blit(byte[,] source, Point upperLeft)
+        public void Blit(bool[,] source, Point upperLeft)
         {
             int sc = 0;
             for (int c = 0; c < source.GetLength(0); c++)
@@ -91,13 +91,13 @@ namespace Blinken
             List<byte[]> bytes = new List<byte[]>();
             for (int row = 0; row <= 6; row += 2)
             {
-                byte[] r0 = new byte[21];
+                bool[] r0 = new bool[21];
                 for (int c = 0; c < 21; c++)
                 {
                     if (c + horizontalOffset < Data.GetLength(0))
                         r0[c] = Data[c + horizontalOffset, row];
                     else
-                        r0[c] = 0;
+                        r0[c] = false;
                 }
 
                 var bs0 = BitUtil.GetRowUsbBytes(r0);
@@ -105,13 +105,13 @@ namespace Blinken
                 byte[] bs1;
                 if (row != 6)
                 {
-                    byte[] r1 = new byte[21];
+                    bool[] r1 = new bool[21];
                     for (int c = 0; c < 21; c++)
                     {
                         if (c + horizontalOffset < Data.GetLength(0))
                             r1[c] = Data[c + horizontalOffset, row + 1];
                         else
-                            r1[c] = 0;
+                            r1[c] = false;
                     }
 
                     bs1 = BitUtil.GetRowUsbBytes(r1);

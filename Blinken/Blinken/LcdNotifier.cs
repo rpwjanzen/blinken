@@ -49,11 +49,40 @@ namespace Blinken
 
             lcdScreen.Width = totalWidth;
 
-            Point upperLeft = Point.Empty;
-            foreach (var c in characters)
+            var line = new bool[totalWidth];
+            for (int i = 0; i < line.GetLength(0); i++)
             {
+                line[i] = i % 5 != 0;
+            }
+
+            Point upperLeft = Point.Empty;
+            //int tw = 0;
+            for (int ci = 0; ci < characters.Count; ci++)
+            {
+                var c = characters[ci];
+                
+                //var segment = new bool[c.Data.GetLength(0) + 1, 1];
+                //for(int i = 0; i < segment.GetLength(0); i++)
+                //{
+                //    segment[i, 0] = line[tw + i];
+                //}
+                
+                //// blit upper border
+                //lcdScreen.Blit(segment, upperLeft);
+                //upperLeft.Y = upperLeft.Y + 2;
+
+                // blit letter contents
                 lcdScreen.Blit(c.Data, upperLeft);
+
+                //// blit lower border
+                //upperLeft.Y = upperLeft.Y + 4;
+
+                //lcdScreen.Blit(segment, upperLeft);
+
+                //var letterwidth = c.Data.GetLength(0);
                 upperLeft.X = upperLeft.X + c.Data.GetLength(0) + 1;
+                //upperLeft.Y = 0;
+                //tw += letterwidth + 1;
             }
 
             {

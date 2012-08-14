@@ -4,7 +4,7 @@ namespace Blinken
 {
     public static class BitUtil
     {
-        public static byte[] GetRowUsbBytes(byte[] rowData)
+        public static byte[] GetRowUsbBytes(bool[] rowData)
         {
             if (rowData == null)
                 throw new ArgumentNullException("rowData");
@@ -15,8 +15,8 @@ namespace Blinken
             byte mask = 0x80;
             for (int i = 0; i < 8; i++)
             {
-                byte pixelData = rowData[i];
-                if (pixelData == 0)
+                bool pixelData = rowData[i];
+                if (!pixelData)
                     b0 |= mask;
 
                 mask = (byte)(mask >> 1);
@@ -26,8 +26,8 @@ namespace Blinken
             mask = 0x80;
             for (int i = 8; i < 16; i++)
             {
-                byte pixelData = rowData[i];
-                if (pixelData == 0)
+                bool pixelData = rowData[i];
+                if (!pixelData)
                     b1 |= mask;
 
                 mask = (byte)(mask >> 1);
@@ -37,8 +37,8 @@ namespace Blinken
             mask = 0x80;
             for (int i = 16; i < 21; i++)
             {
-                byte pixelData = rowData[i];
-                if (pixelData == 0)
+                bool pixelData = rowData[i];
+                if (!pixelData)
                     b2 |= mask;
 
                 mask = (byte)(mask >> 1);

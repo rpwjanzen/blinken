@@ -43,7 +43,7 @@ namespace SignService
                 fonts.Add(font);
             }
 
-            var displayFont = fonts[0];
+            var displayFont = fonts[3];
 
             m_lcdNotifier.Text = testPattern;
 

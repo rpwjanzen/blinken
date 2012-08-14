@@ -7,15 +7,14 @@ using System.Diagnostics;
 
 namespace Blinken
 {
-    [DebuggerDisplay("{Text}")]
     public sealed class LcdScreen
     {
         public const int Width = 21;
         public const int Height = 7;
 
-        public readonly byte[,] Data = new byte[Width, Height];
+        public readonly bool[,] Data = new bool[Width, Height];
 
-        public void Blit(byte[,] source, Point upperLeft)
+        public void Blit(bool[,] source, Point upperLeft)
         {
             int sc = 0;
             for (int c = 0; c < source.GetLength(0); c++)
@@ -34,31 +33,13 @@ namespace Blinken
             }
         }
 
-        public string Text
-        {
-            get
-            {
-                StringBuilder sb = new StringBuilder();
-                for (int c = 0; c < Data.GetLength(1); c++)
-                {
-                    for (int r = 0; r < Data.GetLength(0); r++)
-                    {
-                        byte b = Data[r, c];
-                        sb.Append(b);
-                    }
-                    sb.AppendLine();
-                }
-
-                return sb.ToString();
-            }
-        }
-
         public List<byte[]> GetUsbData()
         {
             List<byte[]> bytes = new List<byte[]>();
+
             for (int row = 0; row <= 6; row += 2)
             {
-                byte[] r0 = new byte[21];
+                bool[] r0 = new bool[21];
                 for (int c = 0; c < 21; c++)
                 {
                     r0[c] = Data[c, row];
@@ -69,7 +50,7 @@ namespace Blinken
                 byte[] bs1;
                 if (row != 6)
                 {
-                    byte[] r1 = new byte[21];
+                    bool[] r1 = new bool[21];
                     for (int c = 0; c < 21; c++)
                     {
                         r1[c] = Data[c, row + 1];

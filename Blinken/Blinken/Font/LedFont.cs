@@ -66,14 +66,14 @@ namespace Blinken.Font
             // ignore seperator line
             int height = Math.Max(0, letterLines.Count - 1);
 
-            byte[,] data = new byte[width, height];
+            bool[,] data = new bool[width, height];
             // ignore seperator line
             for (int r = 0; r < Math.Max(0, letterLines.Count - 1); r++)
             {
                 var cl = letterLines[r];
                 for (int c = 0; c < cl.Length; c++)
                 {
-                    data[c, r] = cl[c] == 'x' ? (byte)1 : (byte)0;
+                    data[c, r] = cl[c] == 'x';
                 }
             }
 
