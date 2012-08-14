@@ -79,14 +79,14 @@ namespace SignService
                     EnvelopeVersion envelopeVersion = binding.EnvelopeVersion;
                     TransferMode transferMode = binding.TransferMode;
 
-                    serviceHost.Open();
+                    //serviceHost.Open();
 
                     Console.WriteLine("The service is ready.");
                     Console.WriteLine("Press <ENTER> to terminate service.");
                     Console.WriteLine();
                     Console.ReadLine();
 
-                    serviceHost.Close();
+                    //serviceHost.Close();
                 }
             }
         }

@@ -13,17 +13,20 @@ namespace SignService
 
         public SignService()
         {
-            string alphabet = @"ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 01234567890 +-=/\|<>,.)(*&^%$#@!~`';:[]{}?";
+            string upperAlphabet = @"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            string lowerAlphabet = @" abcdefghijklmnopqrstuvwxyz";
+            string numbers = @"01234567890 +-=";
+            string symbols = @"/\|<>,.)(*&^%$#@!~`';:[]{}?";
             m_lcdNotifier = new LcdNotifier();
             
 
             List<string> paths = new List<string>()
             {
-                @"Font\MyTiny.txt",
-                @"Font\somybmp01_7.txt",
-                @"Font\somybmp02_7.txt",
-                @"Font\somybmp04_7.txt",
-                @"Font\Tinier.txt",
+                //@"Font\MyTiny.txt",
+                //@"Font\somybmp01_7.txt",
+                //@"Font\somybmp02_7.txt",
+                //@"Font\somybmp04_7.txt",
+                //@"Font\Tinier.txt",
                 @"Font\Tiny.txt",
             };
             List<LedFont> fonts = new List<LedFont>();
@@ -42,7 +45,7 @@ namespace SignService
                         var font = fonts[i];
                         lock (m_lcdNotifier)
                         {
-                            m_lcdNotifier.Text = paths[i] + " " + alphabet;
+                            m_lcdNotifier.Text = symbols;
                             m_lcdNotifier.DrawText(font);
                         }
                     }
@@ -61,7 +64,7 @@ namespace SignService
             var host = OperationContext.Current.Host;
 
             lock (m_lcdNotifier)
-                m_lcdNotifier.Text = (text ?? string.Empty).ToUpper();
+                m_lcdNotifier.Text = (text ?? string.Empty);
         }
 
         #endregion
