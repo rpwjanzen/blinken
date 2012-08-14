@@ -1,10 +1,15 @@
-﻿namespace Blinken
+﻿using System;
+
+namespace Blinken
 {
     public static class BitUtil
     {
         public static byte[] GetRowUsbBytes(byte[] rowData)
         {
-            System.Diagnostics.Debug.Assert(rowData.Length == 21);
+            if (rowData == null)
+                throw new ArgumentNullException("rowData");
+            if (rowData.Length != 21)
+                throw new ArgumentException("rowData.Length must be 21");
 
             byte b0 = 0;
             byte mask = 0x80;
@@ -45,6 +50,12 @@
         // 21x7 LEDs in board, 2 rows at a time
         public static byte[] GetUsbPackets(LedBrightness ledBrightness, byte startingRow, byte b0, byte b1, byte b2, byte b3, byte b4, byte b5)
         {
+            if (startingRow != 0
+                && startingRow != 2
+                && startingRow != 4
+                && startingRow != 6)
+                throw new ArgumentException("startingRow must be one of 0, 2, 4, or 6");
+
             byte brightness = (byte)ledBrightness;
 
             // need to reverse the order of the bits in each byte

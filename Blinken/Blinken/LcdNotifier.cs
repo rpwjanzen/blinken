@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using HidLibrary;
-using System.Collections;
 using System.Drawing;
+using System.Linq;
 using Blinken.Font;
+using HidLibrary;
 
 namespace Blinken
 {
     public sealed class LcdNotifier
     {
         private readonly HidDevice m_device;
-        
 
         public LcdNotifier()
         {
@@ -34,7 +31,7 @@ namespace Blinken
             if (font == null)
                 throw new ArgumentNullException("font");
 
-            DoText(m_device, Text, font);
+            DoText(m_device, Text ?? string.Empty, font);
             System.Threading.Thread.Sleep(400);
         }
 

@@ -1,8 +1,8 @@
-﻿using System.ServiceModel;
+﻿using System.Collections.Generic;
+using System.ServiceModel;
 using System.Threading;
 using Blinken;
 using Blinken.Font;
-using System.Collections.Generic;
 
 namespace SignService
 {
@@ -13,22 +13,29 @@ namespace SignService
 
         public SignService()
         {
+            // Test Patterns
             string upperAlphabet = @"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             string lowerAlphabet = @" abcdefghijklmnopqrstuvwxyz";
             string numbers = @"01234567890 +-=";
             string symbols = @"/\|<>,.)(*&^%$#@!~`';:[]{}?";
+
+            string testPattern = upperAlphabet + " " +
+                lowerAlphabet + " " +
+                numbers + " " +
+                symbols;
+
             m_lcdNotifier = new LcdNotifier();
-            
 
             List<string> paths = new List<string>()
             {
                 //@"Font\MyTiny.txt",
-                //@"Font\somybmp01_7.txt",
-                //@"Font\somybmp02_7.txt",
-                //@"Font\somybmp04_7.txt",
-                //@"Font\Tinier.txt",
+                @"Font\somybmp01_7.txt",
+                @"Font\somybmp02_7.txt",
+                @"Font\somybmp04_7.txt",
+                @"Font\Tinier.txt",
                 @"Font\Tiny.txt",
             };
+
             List<LedFont> fonts = new List<LedFont>();
             foreach (var path in paths)
             {
@@ -36,20 +43,18 @@ namespace SignService
                 fonts.Add(font);
             }
 
+            var displayFont = fonts[0];
+
+            m_lcdNotifier.Text = testPattern;
+
             Thread thread = new Thread(new ThreadStart(() =>
             {
                 while (true)
                 {
-                    for(int i = 0; i < fonts.Count; i++)
+                    lock (m_lcdNotifier)
                     {
-                        var font = fonts[i];
-                        lock (m_lcdNotifier)
-                        {
-                            m_lcdNotifier.Text = symbols;
-                            m_lcdNotifier.DrawText(font);
-                        }
+                        m_lcdNotifier.DrawText(displayFont);
                     }
-
                 }
             }));
             thread.IsBackground = true;
@@ -61,10 +66,8 @@ namespace SignService
         [OperationBehavior(ReleaseInstanceMode = ReleaseInstanceMode.None)]
         public void SetText(string text)
         {
-            var host = OperationContext.Current.Host;
-
             lock (m_lcdNotifier)
-                m_lcdNotifier.Text = (text ?? string.Empty);
+                m_lcdNotifier.Text = text;
         }
 
         #endregion
