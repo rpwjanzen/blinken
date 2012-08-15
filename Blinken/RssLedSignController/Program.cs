@@ -17,7 +17,7 @@ namespace RssLedSignController
         static void Main(string[] args)
         {
             var lcdNotifier = new LcdNotifier();
-            LedFont font = LedFont.LoadFromFile(@"Font\Tiny.txt");
+            LedFont font = LedFont.LoadFromFile(@"Font\somybmp01_7.txt");
 
             m_feed = new RssFeed();
             m_feed.Loaded += feed_Loaded;

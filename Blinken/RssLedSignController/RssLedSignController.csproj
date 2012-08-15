@@ -67,9 +67,14 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Font\somybmp04_7.txt">
+    <Content Include="Font\somybmp01_7.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Font\somybmp02_7.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Font\somybmp04_7.txt" />
+    <Content Include="Font\Tinier.txt" />
     <Content Include="Font\Tiny.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
