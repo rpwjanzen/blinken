@@ -24,6 +24,14 @@ namespace MailNotifierService
             m_thread.Start();
         }
 
+        public void Stop()
+        {
+            lock (m_threadLock)
+            {
+                m_stopRequested = true;
+            }
+        }
+
         #region IMailNotifierService Members
 
         [OperationBehavior(ReleaseInstanceMode = ReleaseInstanceMode.None)]

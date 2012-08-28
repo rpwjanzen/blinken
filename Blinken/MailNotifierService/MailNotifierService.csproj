@@ -35,9 +35,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,7 +48,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IMailNotifierService.cs" />
+    <Compile Include="MailNotifierServiceInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="MailNotifierService.cs" />
+    <Compile Include="MailNotifierWindowsService.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
