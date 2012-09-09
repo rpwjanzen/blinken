@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="6363405c-f70a-4bb4-8dc0-4c4abd270275" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8002/mailnotifier/service" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="mailnotifier.xsd" MetadataType="Schema" ID="6d993508-2b42-43bd-88f6-1f2f13f1c37f" SourceId="1" SourceUrl="http://localhost:8003/mailnotifier?xsd=xsd0" />
+    <MetadataFile FileName="mailnotifier.disco" MetadataType="Disco" ID="985c7822-eab0-40e5-b574-2373a9cca63f" SourceId="1" SourceUrl="http://localhost:8003/mailnotifier?disco" />
+    <MetadataFile FileName="NotifierService.wsdl" MetadataType="Wsdl" ID="22bae905-6979-4dc2-a42f-1562111a5b7f" SourceId="1" SourceUrl="http://localhost:8003/mailnotifier?wsdl" />
+    <MetadataFile FileName="mailnotifier1.xsd" MetadataType="Schema" ID="534e12ef-7cd8-4633-a82e-8441c7fa3985" SourceId="1" SourceUrl="http://localhost:8003/mailnotifier?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
