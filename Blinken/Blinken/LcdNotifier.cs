@@ -22,6 +22,11 @@ namespace Blinken
                 m_device = device;
                 break;
             }
+            if (m_device == null)
+            {
+                Console.Error.WriteLine("Cannot find USB LED sign.");
+                return;
+            }
         }
 
         public string Text;
