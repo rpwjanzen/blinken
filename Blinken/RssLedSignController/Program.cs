@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Timers;
+using Argotic.Common;
 using Argotic.Syndication;
 using Blinken;
 using Blinken.Font;
@@ -14,44 +16,56 @@ namespace RssLedSignController
         private static List<string> m_forecastFeedLines = new List<string>();
         private static List<string> m_allFeedLines = new List<string>();
 
+        private static Timer m_reloadTimer;
+
         static void Main(string[] args)
         {
             var lcdNotifier = new LcdNotifier();
-            LedFont font = LedFont.LoadFromFile(@"Font\somybmp01_7.txt");
+            //LedFont font = LedFont.LoadFromFile(@"Font\somybmp01_7.txt");
+            LedFont font = LedFont.LoadFromFile(@"Font\Tinier.txt");
+
+            m_reloadTimer = new Timer();
+            m_reloadTimer.Elapsed += (s, e) =>
+            {
+                Console.WriteLine("Reloading RSS Feed....");
+                m_feed.LoadAsync(new Uri("http://feeds.huffingtonpost.com/HP/MostPopular"), null);
+            };
+            m_reloadTimer.Interval = TimeSpan.FromSeconds(15).TotalMilliseconds;
+
 
             m_feed = new RssFeed();
             m_feed.Loaded += feed_Loaded;
+            m_reloadTimer.Start();
+            Console.WriteLine("Reloading RSS Feed....");
             m_feed.LoadAsync(new Uri("http://feeds.huffingtonpost.com/HP/MostPopular"), null);
 
+            int i = 0;
             while (true)
             {
                 lock (m_allFeedLines)
                 {
-                    for (int i = 0; i < m_allFeedLines.Count; i++)
+                    if (m_allFeedLines.Any())
                     {
+                        if (i >= m_allFeedLines.Count)
+                            i = 0;
                         lcdNotifier.Text = m_allFeedLines[i];
-                        lcdNotifier.ScrollText(font);
                     }
                 }
 
-                System.Threading.Thread.Sleep(1000);
+                lcdNotifier.ScrollText(font, TimeSpan.FromMilliseconds(20));
+                i++;
+
+                // end of messages break
+                //System.Threading.Thread.Sleep(1000);
             }
         }
 
-        private static void feed_Loaded(object sender, Argotic.Common.SyndicationResourceLoadedEventArgs e)
+        private static void feed_Loaded(object sender, SyndicationResourceLoadedEventArgs e)
         {
+            Console.WriteLine("RSS Feed loaded.");
             List<string[]> allLines = new List<string[]>();
             foreach (var rssItem in m_feed.Channel.Items)
             {
-                //string[] descriptionLines = rssItem.Description.Split('\n');
-                //for (int i = 0; i < descriptionLines.Length; i++)
-                //{
-                //    string line = descriptionLines[i];
-                //    line = RemoveHtml(line);
-
-                //    descriptionLines[i] = line.Trim();
-                //}
-
                 string title = rssItem.Title;
                 title = RemoveHtml(title);
                 allLines.Add(new string [] { title });
@@ -85,6 +99,8 @@ namespace RssLedSignController
             line = line.Replace("<&>", "&");
             line = line.Replace("PHOTOS", "");
             line = line.Replace("PHOTO", "");
+            line = line.Replace("UPDATE", "");
+            line = line.Replace("AUDIO", "");
             line = line.Replace("LIVE UPDATES", "");
             line = line.Replace("VIDEO", "");
             line = line.Replace("POLL", "");

@@ -31,15 +31,15 @@ namespace Blinken
 
         public string Text;
 
-        public void ScrollText(LedFont font)
+        public void ScrollText(LedFont font, TimeSpan scrollDelay)
         {
             if (font == null)
                 throw new ArgumentNullException("font");
 
-            ScrollText(m_device, Text ?? string.Empty, font);
+            ScrollText(m_device, Text ?? string.Empty, font, scrollDelay);
         }
 
-        private static void ScrollText(HidDevice device, string text, LedFont font)
+        private static void ScrollText(HidDevice device, string text, LedFont font, TimeSpan scrollDelay)
         {
             VirtualLcdScreen lcdScreen = new VirtualLcdScreen();
             List<Letter> characters;
@@ -60,36 +60,14 @@ namespace Blinken
             }
 
             Point upperLeft = Point.Empty;
-            //int tw = 0;
             for (int ci = 0; ci < characters.Count; ci++)
             {
                 var c = characters[ci];
-                
-                //var segment = new bool[c.Data.GetLength(0) + 1, 1];
-                //for(int i = 0; i < segment.GetLength(0); i++)
-                //{
-                //    segment[i, 0] = line[tw + i];
-                //}
-                
-                //// blit upper border
-                //lcdScreen.Blit(segment, upperLeft);
-                //upperLeft.Y = upperLeft.Y + 2;
-
-                // blit letter contents
-                //lcdScreen.Blit(c.Data, new Rectangle(Point.Empty, new Size(c.Data.GetLength(0), c.Data.GetLength(1))), new Point(upperLeft.X, upperLeft.Y));
                 lcdScreen.Blit(c.Data, upperLeft);
-
-                //// blit lower border
-                //upperLeft.Y = upperLeft.Y + 4;
-
-                //lcdScreen.Blit(segment, upperLeft);
-
-                //var letterwidth = c.Data.GetLength(0);
                 upperLeft.X = upperLeft.X + c.Data.GetLength(0) + 1;
-                //upperLeft.Y = 0;
-                //tw += letterwidth + 1;
             }
 
+            // initial delay before we start scrolling because text is hard to read if it is scrolling from the start
             {
                 var usbData = lcdScreen.GetUsbData(0);
 
@@ -99,20 +77,24 @@ namespace Blinken
                     {
                         device.Write(usbData[i]);
                     }
+
+                    // initial delay before horizontal scrolling starts
                     System.Threading.Thread.Sleep(400);
                 }
             }
 
-            for (int c = 0; c < lcdScreen.Width; c++)
+            for (int horizontalOffset = 0; horizontalOffset < lcdScreen.Width; horizontalOffset++)
             {
-                var usbData = lcdScreen.GetUsbData(c);
+                var usbData = lcdScreen.GetUsbData(horizontalOffset);
 
                 for (int i = 0; i < usbData.Count; i++)
                 {
-                    device.Write(usbData[i]);
+                    var usbBytes = usbData[i];
+                    device.Write(usbBytes);
                 }
 
-                System.Threading.Thread.Sleep(40);
+                // horizontal scrolling delay
+                System.Threading.Thread.Sleep(scrollDelay);
             }
         }
     }

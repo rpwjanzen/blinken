@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 using System.Threading;
 using Blinken;
@@ -53,7 +54,7 @@ namespace SignService
                 {
                     lock (m_lcdNotifier)
                     {
-                        m_lcdNotifier.ScrollText(displayFont);
+                        m_lcdNotifier.ScrollText(displayFont, TimeSpan.FromMilliseconds(40));
                     }
                 }
             }));

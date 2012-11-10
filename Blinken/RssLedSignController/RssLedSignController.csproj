@@ -74,7 +74,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Font\somybmp04_7.txt" />
-    <Content Include="Font\Tinier.txt" />
+    <Content Include="Font\Tinier.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Font\Tiny.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
