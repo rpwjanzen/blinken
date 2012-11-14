@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="9efddd7c-65a8-480a-9635-545cbfda17fb" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="95719379-8476-4332-bdaf-b8b53cbf111c" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
     <EnableDataBinding>true</EnableDataBinding>
     <ExcludedTypes />
     <ImportXmlTypes>false</ImportXmlTypes>
@@ -21,10 +22,10 @@
     <MetadataSource Address="http://localhost:8001/ledsign" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ledsign.xsd" MetadataType="Schema" ID="8467ddea-1005-4117-bea9-2cacbbeb21b7" SourceId="1" SourceUrl="http://localhost:8001/ledsign?xsd=xsd1" />
-    <MetadataFile FileName="ledsign1.xsd" MetadataType="Schema" ID="b7a80f33-d70d-45b3-a5ab-0be15fe46870" SourceId="1" SourceUrl="http://localhost:8001/ledsign?xsd=xsd0" />
-    <MetadataFile FileName="ledsign2.xsd" MetadataType="Schema" ID="06af7b0e-7eac-4581-9d66-77efba26a24c" SourceId="1" SourceUrl="http://localhost:8001/ledsign?xsd=xsd2" />
-    <MetadataFile FileName="SignService.wsdl" MetadataType="Wsdl" ID="907132d5-28fd-4a11-9897-06291ad84cc2" SourceId="1" SourceUrl="http://localhost:8001/ledsign" />
+    <MetadataFile FileName="ledsign.xsd" MetadataType="Schema" ID="e6fbf5be-8b7f-4ab9-a1ec-b29f65521640" SourceId="1" SourceUrl="http://localhost:8001/ledsign?xsd=xsd1" />
+    <MetadataFile FileName="ledsign1.xsd" MetadataType="Schema" ID="fad3b46c-d4c4-4b02-8eb3-a3acbf751b66" SourceId="1" SourceUrl="http://localhost:8001/ledsign?xsd=xsd0" />
+    <MetadataFile FileName="ledsign2.xsd" MetadataType="Schema" ID="4f7feda8-5f54-4817-b6a2-a3bdee6b099e" SourceId="1" SourceUrl="http://localhost:8001/ledsign?xsd=xsd2" />
+    <MetadataFile FileName="SignService.wsdl" MetadataType="Wsdl" ID="82ad42de-3b75-412b-b203-f9fdb8df89cd" SourceId="1" SourceUrl="http://localhost:8001/ledsign" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

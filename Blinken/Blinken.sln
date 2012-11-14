@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual C# Express 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LedSignLib", "Blinken\LedSignLib.csproj", "{4AD0FBED-C100-4535-8FF9-4E8ADD70DE33}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignController", "SignController\SignController.csproj", "{DD134147-9329-4D80-9235-2A53C3DE7542}"
@@ -26,6 +26,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MorseCodeReceiver", "MorseCodeReceiver\MorseCodeReceiver.csproj", "{B87DF560-22D5-49E3-9141-6B343A7B8802}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WFMorseCodeReceiver", "WFMorseCodeReceiver\WFMorseCodeReceiver.csproj", "{E7F96FEA-76F3-48C4-9E99-8DA2239E46DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TfsConsoleApplication", "TfsConsoleApplication\TfsConsoleApplication.csproj", "{3B8EFE7B-01D8-4D84-B19E-20074CA55303}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -122,6 +124,7 @@ Global
 		{0AF352F7-5CAD-447D-B6A0-3EF24B76FC61}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{0AF352F7-5CAD-447D-B6A0-3EF24B76FC61}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{0AF352F7-5CAD-447D-B6A0-3EF24B76FC61}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0AF352F7-5CAD-447D-B6A0-3EF24B76FC61}.Debug|x86.Build.0 = Debug|Any CPU
 		{0AF352F7-5CAD-447D-B6A0-3EF24B76FC61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AF352F7-5CAD-447D-B6A0-3EF24B76FC61}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0AF352F7-5CAD-447D-B6A0-3EF24B76FC61}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
@@ -167,6 +170,17 @@ Global
 		{E7F96FEA-76F3-48C4-9E99-8DA2239E46DB}.Release|Mixed Platforms.Build.0 = Release|x86
 		{E7F96FEA-76F3-48C4-9E99-8DA2239E46DB}.Release|x86.ActiveCfg = Release|x86
 		{E7F96FEA-76F3-48C4-9E99-8DA2239E46DB}.Release|x86.Build.0 = Release|x86
+		{3B8EFE7B-01D8-4D84-B19E-20074CA55303}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B8EFE7B-01D8-4D84-B19E-20074CA55303}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B8EFE7B-01D8-4D84-B19E-20074CA55303}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3B8EFE7B-01D8-4D84-B19E-20074CA55303}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3B8EFE7B-01D8-4D84-B19E-20074CA55303}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3B8EFE7B-01D8-4D84-B19E-20074CA55303}.Debug|x86.Build.0 = Debug|Any CPU
+		{3B8EFE7B-01D8-4D84-B19E-20074CA55303}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B8EFE7B-01D8-4D84-B19E-20074CA55303}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B8EFE7B-01D8-4D84-B19E-20074CA55303}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3B8EFE7B-01D8-4D84-B19E-20074CA55303}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{3B8EFE7B-01D8-4D84-B19E-20074CA55303}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,5 +7,8 @@ namespace SignService
     {
         [OperationContract]
         void SetText(string text);
+
+        [OperationContract]
+        void SetImage(bool[] imageData);
     }
 }

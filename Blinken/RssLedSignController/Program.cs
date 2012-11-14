@@ -21,8 +21,8 @@ namespace RssLedSignController
         static void Main(string[] args)
         {
             var lcdNotifier = new LcdNotifier();
-            //LedFont font = LedFont.LoadFromFile(@"Font\somybmp01_7.txt");
-            LedFont font = LedFont.LoadFromFile(@"Font\Tinier.txt");
+            LedFont font = LedFont.LoadFromFile(@"Font\somybmp01_7.txt");
+            //LedFont font = LedFont.LoadFromFile(@"Font\tinier.txt");
 
             m_reloadTimer = new Timer();
             m_reloadTimer.Elapsed += (s, e) =>
@@ -30,7 +30,7 @@ namespace RssLedSignController
                 Console.WriteLine("Reloading RSS Feed....");
                 m_feed.LoadAsync(new Uri("http://feeds.huffingtonpost.com/HP/MostPopular"), null);
             };
-            m_reloadTimer.Interval = TimeSpan.FromSeconds(15).TotalMilliseconds;
+            m_reloadTimer.Interval = TimeSpan.FromHours(1).TotalMilliseconds;
 
 
             m_feed = new RssFeed();
@@ -104,6 +104,7 @@ namespace RssLedSignController
             line = line.Replace("LIVE UPDATES", "");
             line = line.Replace("VIDEO", "");
             line = line.Replace("POLL", "");
+            line = line.Replace("(/)", "");
             line = line.Replace("()", "");
             line = line.Replace("(, )", "");
             line = line.Replace("(, , )", "");

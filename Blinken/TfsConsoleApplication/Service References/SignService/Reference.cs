@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SignTextClient.SignService {
+namespace TfsConsoleApplication.SignService {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -18,17 +18,23 @@ namespace SignTextClient.SignService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignService/SetText", ReplyAction="http://tempuri.org/ISignService/SetTextResponse")]
         void SetText(string text);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignService/SetText", ReplyAction="http://tempuri.org/ISignService/SetTextResponse")]
+        System.Threading.Tasks.Task SetTextAsync(string text);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignService/SetImage", ReplyAction="http://tempuri.org/ISignService/SetImageResponse")]
         void SetImage(bool[] imageData);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignService/SetImage", ReplyAction="http://tempuri.org/ISignService/SetImageResponse")]
+        System.Threading.Tasks.Task SetImageAsync(bool[] imageData);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ISignServiceChannel : SignTextClient.SignService.ISignService, System.ServiceModel.IClientChannel {
+    public interface ISignServiceChannel : TfsConsoleApplication.SignService.ISignService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class SignServiceClient : System.ServiceModel.ClientBase<SignTextClient.SignService.ISignService>, SignTextClient.SignService.ISignService {
+    public partial class SignServiceClient : System.ServiceModel.ClientBase<TfsConsoleApplication.SignService.ISignService>, TfsConsoleApplication.SignService.ISignService {
         
         public SignServiceClient() {
         }
@@ -53,8 +59,16 @@ namespace SignTextClient.SignService {
             base.Channel.SetText(text);
         }
         
+        public System.Threading.Tasks.Task SetTextAsync(string text) {
+            return base.Channel.SetTextAsync(text);
+        }
+        
         public void SetImage(bool[] imageData) {
             base.Channel.SetImage(imageData);
+        }
+        
+        public System.Threading.Tasks.Task SetImageAsync(bool[] imageData) {
+            return base.Channel.SetImageAsync(imageData);
         }
     }
 }

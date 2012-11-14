@@ -30,6 +30,52 @@ namespace Blinken
         }
 
         public string Text;
+        public bool[,] Image;
+
+        public void ScrollImage(TimeSpan scrollDelay)
+        {
+            if (Image == null)
+                return;
+
+            VirtualLcdScreen virtualLcdScreen = new VirtualLcdScreen();
+            
+            int totalWidth = Math.Max(21, Image.GetLength(0));
+
+            virtualLcdScreen.Width = totalWidth;
+
+            Point upperLeft = Point.Empty;
+            virtualLcdScreen.Blit(Image, upperLeft);
+
+            // initial delay before we start scrolling because text is hard to read if it is scrolling from the start
+            {
+                var usbData = virtualLcdScreen.GetUsbData(0);
+
+                for (int n = 0; n < 2; n++)
+                {
+                    for (int i = 0; i < usbData.Count; i++)
+                    {
+                        m_device.Write(usbData[i]);
+                    }
+
+                    // initial delay before horizontal scrolling starts
+                    System.Threading.Thread.Sleep(400);
+                }
+            }
+
+            for (int horizontalOffset = 0; horizontalOffset < virtualLcdScreen.Width; horizontalOffset++)
+            {
+                var usbData = virtualLcdScreen.GetUsbData(horizontalOffset);
+
+                for (int i = 0; i < usbData.Count; i++)
+                {
+                    var usbBytes = usbData[i];
+                    m_device.Write(usbBytes);
+                }
+
+                // horizontal scrolling delay
+                System.Threading.Thread.Sleep(scrollDelay);
+            }
+        }
 
         public void ScrollText(LedFont font, TimeSpan scrollDelay)
         {
