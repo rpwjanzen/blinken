@@ -26,23 +26,29 @@ namespace TfsConsoleApplication
             m_timer.Start();
 
             m_allCounts = GetTfsUserCommitCounts();
+            foreach (var t in m_allCounts)
+                RenderToConsole(t.Item1, t.Item2);
 
             while (true)
             {
                 foreach (var t in m_allCounts)
                 {
-                    RenderText(t.Item1);
-                    var image = GetImage(null, t.Item2.ToList());
+                    string[] parts = t.Item1.Split('\\');
+                    string initials = parts[1].Substring(0, 2).ToUpperInvariant();
+                    string rest = parts[1].Substring(2);
+                    string renderText = initials + rest;
+                    RenderText(renderText);
+                    var image = GetImage(t.Item2.ToList());
                     RenderImage(image);
                 }
             }
-
-            Console.ReadLine();
         }
 
         static void m_timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             m_allCounts = GetTfsUserCommitCounts();
+            foreach(var t in m_allCounts)
+                RenderToConsole(t.Item1, t.Item2);
         }
 
         private static List<Tuple<string, List<int>>> GetTfsUserCommitCounts()
@@ -57,8 +63,6 @@ namespace TfsConsoleApplication
             ReadOnlyCollection<CatalogNode> collectionNodes = configurationServer.CatalogNode.QueryChildren(
                 new[] { CatalogResourceTypes.ProjectCollection },
                 false, CatalogQueryOptions.None);
-
-
 
             // List the team project collections
             foreach (CatalogNode collectionNode in collectionNodes)
@@ -82,7 +86,24 @@ namespace TfsConsoleApplication
                 }
 
                 VersionControlServer versionControlServer = (VersionControlServer)teamProjectCollection.GetService(typeof(VersionControlServer));
-                foreach (var username in new string[] { @"MEI\ptrinh", @"MEI\dkoleszar", @"MEI\pdewis", @"MEI\rjanzen", @"MEI\tnguyen", @"MEI\kimam", @"MEI\jpeoples", @"MEI\kmiller" })
+                foreach (var username in new string[]
+                {
+                    @"MEI\pdewis",
+                    @"MEI\ptrinh",
+                    @"MEI\dkoleszar", 
+
+                    @"MEI\kmiller",
+                    @"MEI\rjanzen",
+                    @"MEI\tnguyen",
+                    @"MEI\kimam",
+                    @"MEI\jpeoples",
+                    
+                    @"MEI\dsum",
+                    @"MEI\espielman",
+                    @"MEI\mkwan",
+                    @"MEI\tmcivor",
+                    @"MEI\akwok",
+                })
                 {
                     var dailyChangeCounts = GetDailyChangeCounts(versionControlServer, username);
                     allCounts.Add(Tuple.Create(username, dailyChangeCounts.ToList()));
@@ -92,7 +113,7 @@ namespace TfsConsoleApplication
             return allCounts;
         }
 
-        private static bool [] GetImage(string username, IEnumerable<int> counts)
+        private static bool[] GetImage(IEnumerable<int> counts)
         {
             int width = 21;
             int height = 7;
@@ -123,68 +144,48 @@ namespace TfsConsoleApplication
 
         private static void RenderText(string text)
         {
-            try
-            {
-                const string uriText = "net.pipe://localhost/ledsign/sign";
+            const string uriText = "net.pipe://localhost/ledsign/sign";
 
-                NetNamedPipeBinding binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
+            NetNamedPipeBinding binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
 
-                EndpointAddress endpointAddress = new EndpointAddress(uriText);
-                SignService.SignServiceClient client = new SignService.SignServiceClient(binding, endpointAddress);
-                client.SetText(text);
-                client.Close();
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("She broke. :(");
-            }
+            EndpointAddress endpointAddress = new EndpointAddress(uriText);
+            SignService.SignServiceClient client = new SignService.SignServiceClient(binding, endpointAddress);
+            client.SetText(text);
+            client.Close();
         }
 
         private static void RenderImage(bool[] image)
         {
-            try
-            {
-                const string uriText = "net.pipe://localhost/ledsign/sign";
+            const string uriText = "net.pipe://localhost/ledsign/sign";
 
-                NetNamedPipeBinding binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
+            NetNamedPipeBinding binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
 
-                EndpointAddress endpointAddress = new EndpointAddress(uriText);
-                SignService.SignServiceClient client = new SignService.SignServiceClient(binding, endpointAddress);
-                client.SetImage(image);
-                client.Close();
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("She broke. :(");
-            }
+            EndpointAddress endpointAddress = new EndpointAddress(uriText);
+            SignService.SignServiceClient client = new SignService.SignServiceClient(binding, endpointAddress);
+            client.SetImage(image);
+            client.Close();
         }
 
         private static IEnumerable<int> GetDailyChangeCounts(VersionControlServer versionControlServer, string username)
         {
-            var counts = Enumerable.Range(0, 21)
-                .Select(i => ChangeCountForDay(i, username, versionControlServer))
+            var now = DateTime.Now.Date;
+            // get up to last 5 weeks of of data (so we can ignore the weekends later)
+            var counts = Enumerable.Range(0, 7 * 5)
+                .Select(i =>
+                {
+                    var startInterval = now - TimeSpan.FromDays(i);
+                    var endInterval = now - TimeSpan.FromDays(i - 1);
+
+                    return Tuple.Create(startInterval, endInterval);
+                })
+                // skip weekends
+                .Where(t => t.Item2.DayOfWeek != DayOfWeek.Monday && t.Item2.DayOfWeek != DayOfWeek.Sunday)
+                // ensure we have 21 days of data
+                .Take(21)
+                .Select(t => ChangeCountForDay(t.Item1, t.Item2, username, versionControlServer))
                 .ToArray();
 
-            Console.WriteLine(username);
-            foreach (var c in counts)
-                Console.WriteLine(c);
-
-            // map to 0 - 7 height
-            int min = counts.Min();
-            int max = counts.Max();
-
-            if (min > 0)
-                min = 0;
-            if (max < 7)
-                max = 7;
-
-            int[] mapped = new int[counts.Length];
-            for (int i = 0; i < counts.Length; i++)
-            {
-                mapped[i] = counts[i];//(int)Math.Round(Map(counts[i], min, max, 0, 7));
-            }
-
-            return mapped;
+            return counts;
         }
 
         private static void RenderToConsole(string username, IEnumerable<int> counts)
@@ -198,12 +199,12 @@ namespace TfsConsoleApplication
             }
         }
 
-        private static int ChangeCountForDay(int daysAgo, string username, VersionControlServer versionControlServer)
+        private static int ChangeCountForDay(DateTime startInterval, DateTime endInterval, string username, VersionControlServer versionControlServer)
         {
-            var now = DateTime.Now.Date;
+            //var now = DateTime.Now.Date;
 
-            var startInterval = now - TimeSpan.FromDays(daysAgo);
-            var endInterval = now - TimeSpan.FromDays(daysAgo - 1);
+            //var startInterval = now - TimeSpan.FromDays(daysAgo);
+            //var endInterval = now - TimeSpan.FromDays(daysAgo - 1);
 
             DateVersionSpec versionFrom = new DateVersionSpec(startInterval);
             VersionSpec versionTo = new DateVersionSpec(endInterval);
