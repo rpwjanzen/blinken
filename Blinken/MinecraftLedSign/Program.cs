@@ -40,7 +40,7 @@ namespace MinecraftLedSign
 
                             using (SignService.SignServiceClient client = new SignService.SignServiceClient(binding, endpointAddress))
                             {
-                                client.SetText(text);
+                                client.ScrollText(text);
                                 client.Close();
                             }
                         }

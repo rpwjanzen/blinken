@@ -15,17 +15,23 @@ namespace TfsConsoleApplication.SignService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SignService.ISignService")]
     public interface ISignService {
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignService/ScrollText", ReplyAction="http://tempuri.org/ISignService/ScrollTextResponse")]
+        void ScrollText(string text);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignService/ScrollText", ReplyAction="http://tempuri.org/ISignService/ScrollTextResponse")]
+        System.Threading.Tasks.Task ScrollTextAsync(string text);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignService/ScrollImage", ReplyAction="http://tempuri.org/ISignService/ScrollImageResponse")]
+        void ScrollImage(bool[] imageData);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignService/ScrollImage", ReplyAction="http://tempuri.org/ISignService/ScrollImageResponse")]
+        System.Threading.Tasks.Task ScrollImageAsync(bool[] imageData);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignService/SetText", ReplyAction="http://tempuri.org/ISignService/SetTextResponse")]
         void SetText(string text);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignService/SetText", ReplyAction="http://tempuri.org/ISignService/SetTextResponse")]
         System.Threading.Tasks.Task SetTextAsync(string text);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignService/SetImage", ReplyAction="http://tempuri.org/ISignService/SetImageResponse")]
-        void SetImage(bool[] imageData);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignService/SetImage", ReplyAction="http://tempuri.org/ISignService/SetImageResponse")]
-        System.Threading.Tasks.Task SetImageAsync(bool[] imageData);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -55,20 +61,28 @@ namespace TfsConsoleApplication.SignService {
                 base(binding, remoteAddress) {
         }
         
+        public void ScrollText(string text) {
+            base.Channel.ScrollText(text);
+        }
+        
+        public System.Threading.Tasks.Task ScrollTextAsync(string text) {
+            return base.Channel.ScrollTextAsync(text);
+        }
+        
+        public void ScrollImage(bool[] imageData) {
+            base.Channel.ScrollImage(imageData);
+        }
+        
+        public System.Threading.Tasks.Task ScrollImageAsync(bool[] imageData) {
+            return base.Channel.ScrollImageAsync(imageData);
+        }
+        
         public void SetText(string text) {
             base.Channel.SetText(text);
         }
         
         public System.Threading.Tasks.Task SetTextAsync(string text) {
             return base.Channel.SetTextAsync(text);
-        }
-        
-        public void SetImage(bool[] imageData) {
-            base.Channel.SetImage(imageData);
-        }
-        
-        public System.Threading.Tasks.Task SetImageAsync(bool[] imageData) {
-            return base.Channel.SetImageAsync(imageData);
         }
     }
 }

@@ -6,9 +6,12 @@ namespace SignService
     public interface ISignService
     {
         [OperationContract]
-        void SetText(string text);
+        void ScrollText(string text);
 
         [OperationContract]
-        void SetImage(bool[] imageData);
+        void ScrollImage(bool[] imageData);
+
+        [OperationContract]
+        void SetText(string text);
     }
 }

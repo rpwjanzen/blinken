@@ -77,6 +77,43 @@ namespace Blinken
             }
         }
 
+        public void ShowText(LedFont font)
+        {
+            VirtualLcdScreen lcdScreen = new VirtualLcdScreen();
+            List<Letter> characters;
+            characters = Text
+                .Select(c => font[c])
+                .ToList();
+
+            int totalCharacterWidths = characters
+                .Aggregate(0, (acc, l) => l.Data.GetLength(0) + 1 + acc);
+            int totalWidth = Math.Max(21, totalCharacterWidths);
+
+            lcdScreen.Width = totalWidth;
+
+            var line = new bool[totalWidth];
+            for (int i = 0; i < line.GetLength(0); i++)
+            {
+                line[i] = i % 5 != 0;
+            }
+
+            Point upperLeft = Point.Empty;
+            for (int ci = 0; ci < characters.Count; ci++)
+            {
+                var c = characters[ci];
+                lcdScreen.Blit(c.Data, upperLeft);
+                upperLeft.X = upperLeft.X + c.Data.GetLength(0) + 1;
+            }
+
+            // display text
+            var usbData = lcdScreen.GetUsbData(0);
+            for (int i = 0; i < usbData.Count; i++)
+            {
+                m_device.Write(usbData[i]);
+            }
+            //System.Threading.Thread.Sleep(400);
+        }
+
         public void ScrollText(LedFont font, TimeSpan scrollDelay)
         {
             if (font == null)

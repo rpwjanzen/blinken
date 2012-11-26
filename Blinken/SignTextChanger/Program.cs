@@ -18,7 +18,7 @@ namespace SignTextClient
 
                 EndpointAddress endpointAddress = new EndpointAddress(uriText);
                 SignService.SignServiceClient client = new SignService.SignServiceClient(binding, endpointAddress);
-                client.SetText(args[0]);
+                client.ScrollText(args[0]);
                 client.Close();
             }
             catch (Exception)

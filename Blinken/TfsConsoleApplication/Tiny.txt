@@ -1,0 +1,568 @@
+﻿: 
+
+
+:A
+ x
+x x
+xxx
+x x
+
+:B
+xx
+xxx
+x x
+xx
+
+:C
+ xx
+x
+x
+ xx
+
+:D
+xx
+x x
+x x
+xx
+
+:E
+xxx
+xx
+x
+xxx
+
+:F
+xxx
+x
+xx
+x
+
+:G
+ xx
+x
+x x
+ xx
+
+:H
+x x
+x x
+xxx
+x x
+
+:I
+xxx
+ x
+ x
+xxx
+
+:J
+  x
+  x
+x x
+ x
+
+:K
+x  x
+x x
+xxx
+x  x
+
+:L
+x
+x
+x
+xxx
+
+:M
+x   x
+xx xx
+x x x
+x   x
+
+:N
+x  x
+xx x
+x xx
+x  x
+
+:O
+ xx
+x  x
+x  x
+ xx
+
+:P
+xx
+x x
+xx
+x
+
+:Q
+ xx
+x  x
+x  x
+ xx
+  x
+
+:R
+xx
+x x
+xx
+x x
+
+:S
+ xx
+x
+  x
+xx
+
+:T
+xxx
+ x
+ x
+ x
+
+:U
+x  x
+x  x
+x  x
+ xx
+
+:V
+x   x
+x   x
+ x x
+  x
+
+:W
+x   x
+x x x
+x x x
+ x x
+
+:X
+x x
+ x
+x x
+x x
+
+:Y
+x   x
+ x x
+  x
+  x
+
+:Z
+xxxx
+  x
+ x
+xxxx
+
+:a
+
+ xx
+x x
+ xx
+
+:b
+x
+xx
+x x
+xx
+
+:c
+
+ xx
+x
+ xx
+
+:d
+  x
+ xx
+x x
+ xx
+
+:e
+
+ xx
+xx
+ xx
+
+:f
+ x
+x
+xx
+x
+
+:g
+
+xx
+xx
+ x
+xx
+
+:h
+x
+xx
+x x
+x x
+
+:i
+x
+
+x
+x
+
+:j
+x
+
+x
+x
+x
+
+:k
+x
+x x
+xx
+x x
+
+:l
+x
+x
+x
+x
+
+:m
+
+xx x
+x x x
+x x x
+
+:n
+
+xx
+x x
+x x
+
+:o
+
+ x
+x x
+ x
+
+:p
+
+xx
+x x
+xx
+x
+
+:q
+
+ xx
+x x
+ xx
+  x
+
+:r
+
+xx
+x
+x
+
+:s
+
+ xx
+ x
+xx
+
+:t
+ x
+xxx
+ x
+ x
+
+:u
+
+x x
+x x
+ xx
+
+:v
+
+x x
+x x
+ x
+
+:w
+
+x   x
+x x x
+ x x
+ 
+:x
+
+x x
+ x
+x x
+
+:y
+
+x x
+xxx
+  x
+xx
+
+:z
+
+xxx
+ x
+xxx
+
+:0
+ x
+x x
+x x
+ x
+
+:1
+ x
+xx
+ x
+xxx
+
+:2
+xx
+  x
+x
+xxx
+
+:3
+xx
+ xx
+  x
+xx
+
+:4
+  x
+x x
+xxx
+  x
+
+:5
+xxx
+x
+  x
+xx
+
+:6
+ xx
+x
+xxx
+xxx
+
+:7
+xxx
+  x
+ x
+x
+
+:8
+ x
+xxx
+x x
+ x
+ 
+:9
+ xx
+x x
+xxx
+  x
+
+:$
+ x
+xxx
+ x
+xxx
+ x
+ 
+:+
+
+ x
+xxx
+ x
+
+:-
+
+
+xxx
+
+:*
+x x
+ x
+x x
+
+:/
+   x
+  x
+ x
+x
+
+:=
+
+xxx
+
+xxx
+
+:%
+x  x
+  x
+ x
+x  x
+
+:"
+ x x
+ x x
+
+:'
+x
+x
+
+:#
+ x x
+xxxxx
+ x x
+xxxxx
+ x x
+ 
+:@
+ xx
+x x
+x
+ xx
+
+:&
+ xx
+ x
+x  x
+ xx
+ 
+:_
+
+
+
+xxx
+
+:(
+ x
+x
+x
+x
+ x
+
+:)
+x
+ x
+ x
+ x
+x
+
+:,
+
+
+
+x
+x
+
+:.
+
+
+
+x
+
+::
+
+x
+
+x
+
+:?
+ xx
+   x
+  
+  x
+  
+:!
+x
+x
+
+x
+
+:\
+x
+ x
+  x
+   x
+ 
+:|
+x
+x
+x
+x
+x
+
+:{
+ xx
+ x
+xx
+ x
+ xx
+
+:}
+xx
+ x
+ xx
+ x
+xx
+
+:<
+  x
+ x
+x
+ x
+  x
+
+:>
+x
+ x
+  x
+ x
+x
+
+:[
+xx
+x
+x
+x
+xx
+
+:]
+xx
+ x
+ x
+ x
+xx
+
+:`
+x
+ x
+
+:^
+ x
+x x
+
+:~
+ x x
+x x
+
+ 

@@ -38,7 +38,7 @@ namespace Blinken
         }
 
         /// <summary>
-        /// Blits to the source to the LED screen position specified by the upper left point.
+        /// Blits the source image data to the LED screen position specified by the upper left point.
         /// </summary>
         public void Blit(bool[,] source, Point targetUpperLeft)
         {

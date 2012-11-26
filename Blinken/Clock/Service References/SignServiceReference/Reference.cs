@@ -8,30 +8,39 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MinecraftLedSign.SignService {
+namespace Clock.SignServiceReference {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SignService.ISignService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SignServiceReference.ISignService")]
     public interface ISignService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignService/ScrollText", ReplyAction="http://tempuri.org/ISignService/ScrollTextResponse")]
         void ScrollText(string text);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignService/ScrollText", ReplyAction="http://tempuri.org/ISignService/ScrollTextResponse")]
+        System.Threading.Tasks.Task ScrollTextAsync(string text);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignService/ScrollImage", ReplyAction="http://tempuri.org/ISignService/ScrollImageResponse")]
         void ScrollImage(bool[] imageData);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignService/ScrollImage", ReplyAction="http://tempuri.org/ISignService/ScrollImageResponse")]
+        System.Threading.Tasks.Task ScrollImageAsync(bool[] imageData);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignService/SetText", ReplyAction="http://tempuri.org/ISignService/SetTextResponse")]
         void SetText(string text);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISignService/SetText", ReplyAction="http://tempuri.org/ISignService/SetTextResponse")]
+        System.Threading.Tasks.Task SetTextAsync(string text);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ISignServiceChannel : MinecraftLedSign.SignService.ISignService, System.ServiceModel.IClientChannel {
+    public interface ISignServiceChannel : Clock.SignServiceReference.ISignService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class SignServiceClient : System.ServiceModel.ClientBase<MinecraftLedSign.SignService.ISignService>, MinecraftLedSign.SignService.ISignService {
+    public partial class SignServiceClient : System.ServiceModel.ClientBase<Clock.SignServiceReference.ISignService>, Clock.SignServiceReference.ISignService {
         
         public SignServiceClient() {
         }
@@ -56,12 +65,24 @@ namespace MinecraftLedSign.SignService {
             base.Channel.ScrollText(text);
         }
         
+        public System.Threading.Tasks.Task ScrollTextAsync(string text) {
+            return base.Channel.ScrollTextAsync(text);
+        }
+        
         public void ScrollImage(bool[] imageData) {
             base.Channel.ScrollImage(imageData);
         }
         
+        public System.Threading.Tasks.Task ScrollImageAsync(bool[] imageData) {
+            return base.Channel.ScrollImageAsync(imageData);
+        }
+        
         public void SetText(string text) {
             base.Channel.SetText(text);
+        }
+        
+        public System.Threading.Tasks.Task SetTextAsync(string text) {
+            return base.Channel.SetTextAsync(text);
         }
     }
 }

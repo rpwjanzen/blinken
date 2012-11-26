@@ -15,33 +15,43 @@
       <xsd:import schemaLocation="http://localhost:8001/ledsign?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="ISignService_ScrollText_InputMessage">
+    <wsdl:part name="parameters" element="tns:ScrollText" />
+  </wsdl:message>
+  <wsdl:message name="ISignService_ScrollText_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ScrollTextResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISignService_ScrollImage_InputMessage">
+    <wsdl:part name="parameters" element="tns:ScrollImage" />
+  </wsdl:message>
+  <wsdl:message name="ISignService_ScrollImage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ScrollImageResponse" />
+  </wsdl:message>
   <wsdl:message name="ISignService_SetText_InputMessage">
     <wsdl:part name="parameters" element="tns:SetText" />
   </wsdl:message>
   <wsdl:message name="ISignService_SetText_OutputMessage">
     <wsdl:part name="parameters" element="tns:SetTextResponse" />
   </wsdl:message>
-  <wsdl:message name="ISignService_SetImage_InputMessage">
-    <wsdl:part name="parameters" element="tns:SetImage" />
-  </wsdl:message>
-  <wsdl:message name="ISignService_SetImage_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SetImageResponse" />
-  </wsdl:message>
   <wsdl:portType name="ISignService">
+    <wsdl:operation name="ScrollText">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISignService/ScrollText" message="tns:ISignService_ScrollText_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISignService/ScrollTextResponse" message="tns:ISignService_ScrollText_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ScrollImage">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISignService/ScrollImage" message="tns:ISignService_ScrollImage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISignService/ScrollImageResponse" message="tns:ISignService_ScrollImage_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="SetText">
       <wsdl:input wsaw:Action="http://tempuri.org/ISignService/SetText" message="tns:ISignService_SetText_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISignService/SetTextResponse" message="tns:ISignService_SetText_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="SetImage">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISignService/SetImage" message="tns:ISignService_SetImage_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISignService/SetImageResponse" message="tns:ISignService_SetImage_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetNamedPipeBinding_ISignService" type="tns:ISignService">
     <wsp:PolicyReference URI="#NetNamedPipeBinding_ISignService_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/named-pipe" />
-    <wsdl:operation name="SetText">
-      <soap12:operation soapAction="http://tempuri.org/ISignService/SetText" style="document" />
+    <wsdl:operation name="ScrollText">
+      <soap12:operation soapAction="http://tempuri.org/ISignService/ScrollText" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -49,8 +59,17 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SetImage">
-      <soap12:operation soapAction="http://tempuri.org/ISignService/SetImage" style="document" />
+    <wsdl:operation name="ScrollImage">
+      <soap12:operation soapAction="http://tempuri.org/ISignService/ScrollImage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetText">
+      <soap12:operation soapAction="http://tempuri.org/ISignService/SetText" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

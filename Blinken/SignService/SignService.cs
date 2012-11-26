@@ -11,6 +11,7 @@ namespace SignService
     internal sealed class SignService : ISignService
     {
         private readonly LcdNotifier m_lcdNotifier;
+        private bool m_isScrollText = true;
 
         public SignService()
         {
@@ -55,7 +56,12 @@ namespace SignService
                     lock (m_lcdNotifier)
                     {
                         if (m_lcdNotifier.Text != string.Empty)
-                            m_lcdNotifier.ScrollText(displayFont, TimeSpan.FromMilliseconds(40));
+                        {
+                            if (m_isScrollText)
+                                m_lcdNotifier.ScrollText(displayFont, TimeSpan.FromMilliseconds(40));
+                            else
+                                m_lcdNotifier.ShowText(displayFont);
+                        }
                         else if (m_lcdNotifier.Image != null)
                             m_lcdNotifier.ScrollImage(TimeSpan.FromMilliseconds(40));
                     }
@@ -68,17 +74,18 @@ namespace SignService
         #region ISignService Members
 
         [OperationBehavior(ReleaseInstanceMode = ReleaseInstanceMode.None)]
-        public void SetText(string text)
+        public void ScrollText(string text)
         {
             lock (m_lcdNotifier)
             {
+                m_isScrollText = true;
                 m_lcdNotifier.Image = null;
                 m_lcdNotifier.Text = text;
             }
         }
 
         [OperationBehavior(ReleaseInstanceMode = ReleaseInstanceMode.None)]
-        public void SetImage(bool[] imageData)
+        public void ScrollImage(bool[] imageData)
         {
             int height = 7;
             lock (m_lcdNotifier)
@@ -96,6 +103,18 @@ namespace SignService
                 m_lcdNotifier.Image = newImage;
             }
         }
+
+        [OperationBehavior(ReleaseInstanceMode = ReleaseInstanceMode.None)]
+        public void SetText(string text)
+        {
+            lock (m_lcdNotifier)
+            {
+                m_isScrollText = false;
+                m_lcdNotifier.Image = null;
+                m_lcdNotifier.Text = text;
+            }
+        }
+
         #endregion
     }
 }
