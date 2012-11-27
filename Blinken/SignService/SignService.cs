@@ -30,7 +30,7 @@ namespace SignService
 
             List<string> paths = new List<string>()
             {
-                //@"Font\MyTiny.txt",
+                @"Font\MyTiny.txt",
                 @"Font\somybmp01_7.txt",
                 @"Font\somybmp02_7.txt",
                 @"Font\somybmp04_7.txt",
