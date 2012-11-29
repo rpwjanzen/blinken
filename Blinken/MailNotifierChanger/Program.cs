@@ -22,7 +22,24 @@ namespace MailNotifierClient
 
                 MailNotifierServiceClient client = new MailNotifierServiceClient(binding, endpointAddress);
 
-                if (args.Length == 3)
+                if (args.Length == 1 && args[0] == "rainbow")
+                {
+                    var colors = new Color []
+                    {
+                        Color.Red,
+                        Color.Yellow,
+                        Color.Green,
+                        Color.Blue,
+                        Color.Purple
+                    };
+                    var colorBytes = colors
+                        .SelectMany(c => new byte[] { c.R, c.G, c.B })
+                        .ToArray();
+
+                    Console.WriteLine("Rainbow...");
+                    client.DoFadeToMulti(colorBytes);
+                }
+                else if (args.Length == 3)
                 {
                     byte red = byte.Parse(args[0]);
                     byte green = byte.Parse(args[1]);

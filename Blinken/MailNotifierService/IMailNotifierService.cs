@@ -10,6 +10,9 @@ namespace MailNotifierService
         void DoFadeTo(byte red, byte green, byte blue);
 
         [OperationContract]
+        void DoFadeToMulti(byte [] colorBytes);
+
+        [OperationContract]
         void SetColor(byte red, byte green, byte blue);
     }
 }

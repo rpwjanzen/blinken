@@ -55,12 +55,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MailNotifierService\MailNotifierService.csproj">
-      <Project>{DAD083CB-7AE8-41B9-8508-8145E4D6C963}</Project>
-      <Name>MailNotifierService</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>

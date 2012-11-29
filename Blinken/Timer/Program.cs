@@ -83,7 +83,8 @@ namespace Timer
             if (timeTillTargetTime.TotalDays > 1)
             {
                 double totalHours = timeTillTargetTime.TotalHours;
-                timeText = string.Format("{00:0}", totalHours) + timeTillTargetTime.ToString(@"\:mm");                
+                string totalHoursText = string.Format("{00:0}", Math.Floor(totalHours));
+                timeText = totalHoursText + timeTillTargetTime.ToString(@"\:mm");                
             }
             else if (timeTillTargetTime.TotalMinutes > 60)
             {
