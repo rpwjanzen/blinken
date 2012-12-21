@@ -69,10 +69,6 @@ namespace MailNotifierTimer
 
             System.Threading.Thread flashNotifierThread = new System.Threading.Thread(() =>
             {
-                const string uriText = "net.pipe://localhost/mailnotifier/sign";
-                NetNamedPipeBinding binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
-                EndpointAddress endpointAddress = new EndpointAddress(uriText);
-                MailNotifierServiceClient client = new MailNotifierServiceClient(binding, endpointAddress);
                 Color? previousColor = null;
 
                 while (!m_stopRequested)
@@ -87,31 +83,21 @@ namespace MailNotifierTimer
 
                     if (isFlashEnabled)
                     {
-                        client.SetColor(0, 0, 0);
+                        TrySetColor(Color.Black);
                         System.Threading.Thread.Sleep(250);
 
-                        byte red = currentColor.R;
-                        byte green = currentColor.G;
-                        byte blue = currentColor.B;
-                        client.SetColor(red, green, blue);
-
+                        TrySetColor(currentColor);
                         System.Threading.Thread.Sleep(250);
                     }
                     else
                     {
                         if (previousColor != currentColor)
                         {
-                            byte red = currentColor.R;
-                            byte green = currentColor.G;
-                            byte blue = currentColor.B;
-                            client.SetColor(red, green, blue);
-
+                            TrySetColor(currentColor);
                             previousColor = currentColor;
                         }
                     }
                 }
-
-                client.Close();
             });
             flashNotifierThread.Start();
 
@@ -140,6 +126,32 @@ namespace MailNotifierTimer
 
             m_stopRequested = true;
             flashNotifierThread.Join();
+        }
+
+        private static bool TrySetColor(Color color)
+        {
+            try
+            {
+                const string uriText = "net.pipe://localhost/mailnotifier/sign";
+                NetNamedPipeBinding binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
+                EndpointAddress endpointAddress = new EndpointAddress(uriText);
+                using (MailNotifierServiceClient client = new MailNotifierServiceClient(binding, endpointAddress))
+                {
+                    byte red = color.R;
+                    byte green = color.G;
+                    byte blue = color.B;
+
+                    client.SetColor(red, green, blue);
+
+                    client.Close();
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Failed to set color to " + color + ": " + e.Message);
+                return false;
+            }
         }
     }
 }
