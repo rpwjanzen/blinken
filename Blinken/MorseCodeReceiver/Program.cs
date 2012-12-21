@@ -12,9 +12,69 @@ namespace MorseCodeReceiver
 {
     class Program
     {
+        enum LightState { Off, On };
+        enum MorseCodeType { Dit, Dah, SameLetterSpace, TwoLetterSpace, WordSpace };
+        readonly static Dictionary<char, string> m_morseCode = new Dictionary<char, string>
+        {
+            { 'a', ".-" },
+            { 'b', "-..." },
+            { 'c', "-.-." },
+            { 'd', "-.." },
+            { 'e', "." },
+            { 'f', "..-." },
+            { 'g', "--." },
+            { 'h', "...." },
+            { 'i', ".." },
+            { 'j', ".---" },
+            { 'k', "-.-" },
+            { 'l', ".-.." },
+            { 'm', "--" },
+            { 'n', "-." },
+            { 'o', "---" },
+            { 'p', ".--." },
+            { 'q', "--.-" },
+            { 'r', ".-." },
+            { 's', "..." },
+            { 't', "-" },
+            { 'u', "..-" },
+            { 'v', "...-" },
+            { 'w', ".--" },
+            { 'x', "-..-" },
+            { 'y', "-.--" },
+            { 'z', "--.." },
+            { '1', ".----" },
+            { '2', "..---" },
+            { '3', "...--" },
+            { '4', "....-" },
+            { '5', "....." },
+            { '6', "-...." },
+            { '7', "--..." },
+            { '8', "---.." },
+            { '9', "----." },
+            { '0', "-----" },
+            { '.', ".-.-.-" },
+            { ',', "..---" },
+            { '?', "..--.." },
+            { '\'', ".----." },
+            { '/', "-..-." },
+            { '(', "-.--." },
+            { ')', "-.--.-" },
+            { '&', ".-..." },
+            { ':', "---..." },
+            { ';', "-.-.-." },
+            { '=', "-...-" },
+            { '+', ".-.-." },
+            { '-', "-....-" },
+            { '_', "..--.-" },
+            { '"', ".-..-." },
+            { '$', "...-..-" },
+            { '@', ".--.-." },
+        };
+
+
         static VideoCaptureDevice m_videoSource;
         const int m_framesPerSecond = 30;
-        const int m_framesPerDit = 4;
+        const int m_framesPerDit = 5;
         const int m_maxDroppedFramesCount = 1;
         static bool m_isTesting = false;
 
@@ -72,27 +132,28 @@ namespace MorseCodeReceiver
             {
                 m_rawtext += "-";
             }
-            //Console.WriteLine(m_rawtext);
+
+            Console.Clear();
+            Console.SetCursorPosition(0, 1);
+            Console.Write(m_rawtext);
 
             var ar = GetLetters(GuessMorseCode(m_rawtext)).ToArray();
             if (ar.Length != 0)
             {
                 foreach(var v in ar)
                     m_decodedMessage += v;
-
-                if (m_previousDecodedMessageLength != m_decodedMessage.Length)
-                {
-                    Console.Write("'");
-                    foreach (var c in m_decodedMessage)
-                    {
-                        Console.Write(c);
-                    }
-                    Console.Write("'");
-                    Console.WriteLine();
-                    m_previousDecodedMessageLength = m_decodedMessage.Length;
-                }
                 m_rawtext = string.Empty;
             }
+
+            string message = "'";
+            foreach (var c in m_decodedMessage)
+            {
+                message += c;
+            }
+            message += "'";
+
+            Console.SetCursorPosition(0, 4);
+            Console.Write(message);
         }
 
         private static IEnumerable<MorseCodeType> GuessMorseCode(IEnumerable<char> morseCodeInput)
@@ -108,7 +169,7 @@ namespace MorseCodeReceiver
                 {
                     if (codeLength < m_framesPerDit - m_maxDroppedFramesCount)
                     {
-                        //Console.WriteLine("Skipped too short ON  sequence: " + codeLength);
+                        //Console.WriteLine("Ignored short ON  sequence: " + codeLength);
                         continue;
                     }
 
@@ -121,7 +182,7 @@ namespace MorseCodeReceiver
                 {
                     if (codeLength < m_framesPerDit - m_maxDroppedFramesCount)
                     {
-                        //Console.WriteLine("Skipped too short OFF sequence: " + codeLength);
+                        //Console.WriteLine("Ignored short Off sequence: " + codeLength);
                         continue;
                     }
 
@@ -135,7 +196,6 @@ namespace MorseCodeReceiver
 
                 //Console.WriteLine("Decoded " + morseCodeType);
                 yield return morseCodeType;
-
             }
         }
 
@@ -179,7 +239,7 @@ namespace MorseCodeReceiver
             var kvp0 = m_morseCode.FirstOrDefault(kvp => kvp.Value == text);
             if (kvp0.Equals(default(KeyValuePair<char, string>)))
             {
-                Console.WriteLine("Could not recognize '" + text + "'");
+                //Console.WriteLine("Could not recognize '" + text + "'");
                 return '#';
             }
             else
@@ -225,64 +285,7 @@ namespace MorseCodeReceiver
             }
         }
 
-        enum LightState { Off, On };
-        enum MorseCodeType { Dit, Dah, SameLetterSpace, TwoLetterSpace, WordSpace };
 
-        readonly static Dictionary<char, string> m_morseCode = new Dictionary<char, string>
-        {
-            { 'a', ".-" },
-            { 'b', "-..." },
-            { 'c', "-.-." },
-            { 'd', "-.." },
-            { 'e', "." },
-            { 'f', "..-." },
-            { 'g', "--." },
-            { 'h', "...." },
-            { 'i', ".." },
-            { 'j', ".---" },
-            { 'k', "-.-" },
-            { 'l', ".-.." },
-            { 'm', "--" },
-            { 'n', "-." },
-            { 'o', "---" },
-            { 'p', ".--." },
-            { 'q', "--.-" },
-            { 'r', ".-." },
-            { 's', "..." },
-            { 't', "-" },
-            { 'u', "..-" },
-            { 'v', "...-" },
-            { 'w', ".--" },
-            { 'x', "-..-" },
-            { 'y', "-.--" },
-            { 'z', "--.." },
-            { '1', ".----" },
-            { '2', "..---" },
-            { '3', "...--" },
-            { '4', "....-" },
-            { '5', "....." },
-            { '6', "-...." },
-            { '7', "--..." },
-            { '8', "---.." },
-            { '9', "----." },
-            { '0', "-----" },
-            { '.', ".-.-.-" },
-            { ',', "..---" },
-            { '?', "..--.." },
-            { '\'', ".----." },
-            { '/', "-..-." },
-            { '(', "-.--." },
-            { ')', "-.--.-" },
-            { '&', ".-..." },
-            { ':', "---..." },
-            { ';', "-.-.-." },
-            { '=', "-...-" },
-            { '+', ".-.-." },
-            { '-', "-....-" },
-            { '_', "..--.-" },
-            { '"', ".-..-." },
-            { '$', "...-..-" },
-            { '@', ".--.-." },
-        };
+
     }
 }

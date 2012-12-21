@@ -9,7 +9,7 @@ namespace MorseCodeGenerator
 {
     class Program
     {
-        static readonly TimeSpan m_dotDuration = TimeSpan.FromMilliseconds(250);
+        static readonly TimeSpan m_dotDuration = TimeSpan.FromMilliseconds(500);
 
         static void Main(string[] args)
         {
