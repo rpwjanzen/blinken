@@ -11,7 +11,6 @@ namespace TfsConsoleApplication
     {
         static Timer m_timer;
         static List<Tuple<string, List<int>>> m_allCounts;
-        static LedFont font;
 
         static void Main(string[] args)
         {
@@ -40,7 +39,7 @@ namespace TfsConsoleApplication
                             initials = "DAVID";
                             break;
                         case "KI":
-                            initials = "KAISER";
+                            initials = "KAISAR";
                             break;
                         case "TN":
                             initials = "TRI";
