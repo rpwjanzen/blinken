@@ -35,44 +35,23 @@ namespace TfsConsoleApplication
                     string rest = parts[1].Substring(2);
                     switch (initials)
                     {
-                        case "DK":
-                            initials = "DAVID";
-                            break;
-                        case "KI":
-                            initials = "KAISAR";
-                            break;
-                        case "TN":
-                            initials = "TRI";
-                            break;
                         case "RJ":
                             initials = "RYAN";
-                            break;
-                        case "JP":
-                            initials = "JORDAN";
-                            break;
-                        case "PT":
-                            initials = "PRISSY";
-                            break;
-                        case "PD":
-                            initials = "PAT";
                             break;
                         case "KM":
                             initials = "KEVIN";
                             break;
-                        case "DS":
-                            initials = "DICKY";
+                        case "KB":
+                            initials = "KYLE";
                             break;
-                        case "ES":
-                            initials = "EVAN";
+                        case "BB":
+                            initials = "BRAD";
                             break;
-                        case "MK":
-                            initials = "MARTIN";
+                        case "JW":
+                            initials = "JAMES";
                             break;
-                        case "TM":
-                            initials = "TOM";
-                            break;
-                        case "AK":
-                            initials = "ANDREW";
+                        case "BS":
+                            initials = "BRYAN";
                             break;
 
                         default:

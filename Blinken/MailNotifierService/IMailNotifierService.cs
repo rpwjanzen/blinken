@@ -7,12 +7,12 @@ namespace MailNotifierService
     public interface IMailNotifierService
     {
         [OperationContract]
-        void DoFadeTo(byte red, byte green, byte blue);
+        void FadeToRgb(byte red, byte green, byte blue);
 
         [OperationContract]
-        void DoFadeToMulti(byte [] colorBytes);
+        void FadeToMultiRgb(byte [] colorBytes);
 
         [OperationContract]
-        void SetColor(byte red, byte green, byte blue);
+        void SetColorRgb(byte red, byte green, byte blue);
     }
 }

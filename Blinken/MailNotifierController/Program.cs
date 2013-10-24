@@ -16,7 +16,7 @@ namespace MailNotifierController
 
                 Color color = Color.FromArgb(red, green, blue);
                 var mailNotifier = new MailNotifier();
-                mailNotifier.SetColor(color);
+                mailNotifier.Color = color;
 
                 Console.WriteLine("Color set to " + color.Name);
 
@@ -29,7 +29,7 @@ namespace MailNotifierController
             {
                 var mailNotifier = new MailNotifier();
                 Console.WriteLine("Rainbow!");
-                //mailNotifier.DoRainbow();
+                throw new NotSupportedException();
             }
             else if (args[0] == "fade")
             {
@@ -37,11 +37,11 @@ namespace MailNotifierController
                 var mailNotifier = new MailNotifier();
                 while (true)
                 {
-                    mailNotifier.DoFadeTo(Color.Red);
+                    mailNotifier.FadeTo(Color.Red);
                     System.Threading.Thread.Sleep(150);
-                    mailNotifier.DoFadeTo(Color.Blue);
+                    mailNotifier.FadeTo(Color.Blue);
                     System.Threading.Thread.Sleep(150);
-                    mailNotifier.DoFadeTo(Color.Green);
+                    mailNotifier.FadeTo(Color.Green);
                     System.Threading.Thread.Sleep(150);
                 }
             }
@@ -55,7 +55,7 @@ namespace MailNotifierController
                 var notifierColor = Color.FromArgb(red, green, blue);
 
                 var mailNotifier = new MailNotifier();
-                mailNotifier.SetColor(notifierColor);
+                mailNotifier.Color = notifierColor;
 
                 Console.WriteLine("Color set to " + notifierColor.Name);
             }

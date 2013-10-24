@@ -37,7 +37,7 @@ namespace MailNotifierClient
                         .ToArray();
 
                     Console.WriteLine("Rainbow...");
-                    client.DoFadeToMulti(colorBytes);
+                    client.FadeToMultiRgb(colorBytes);
                 }
                 else if (args.Length == 3)
                 {
@@ -46,7 +46,7 @@ namespace MailNotifierClient
                     byte blue = byte.Parse(args[2]);
 
                     Color color = Color.FromArgb(red, green, blue);
-                    client.SetColor(color.R, color.G, color.B);
+                    client.SetColorRgb(color.R, color.G, color.B);
 
                     Console.WriteLine("Color set to " + color.Name);
 
@@ -58,7 +58,7 @@ namespace MailNotifierClient
                     byte blue = byte.Parse(args[3]);
 
                     Console.WriteLine("Fading...");
-                    client.DoFadeTo(red, green, blue);
+                    client.FadeToRgb(red, green, blue);
                 }
 
                 else if (args.Length != 1)
@@ -72,7 +72,7 @@ namespace MailNotifierClient
                     byte green = RoundToNotifierColorValue(color.G);
                     byte blue = RoundToNotifierColorValue(color.B);
 
-                    client.SetColor(red, green, blue);
+                    client.SetColorRgb(red, green, blue);
 
                     var notifierColor = Color.FromArgb(red, green, blue);
                     Console.WriteLine("Color set to " + notifierColor.Name);
@@ -92,7 +92,7 @@ namespace MailNotifierClient
             byte newValue;
             if (b == 0)
                 newValue = 0;
-            else if (b > 64)
+            else if (b > 255)
                 newValue = 64;
             else
                 newValue = b;

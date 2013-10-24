@@ -11,96 +11,58 @@ namespace MailNotifierService
     public sealed class NotifierService : IMailNotifierService
     {
         private readonly MailNotifier m_mailNotifier;
-        private Thread m_thread;
-        private readonly object m_threadLock = new object();
-
-        private bool m_stopRequested;
 
         public NotifierService()
         {
             m_mailNotifier = new MailNotifier();
-            m_mailNotifier.SetColor(Color.White);
-
-            m_thread = new Thread(new ThreadStart(() => { }));
-            m_thread.Start();
-        }
-
-        public void Stop()
-        {
-            lock (m_threadLock)
-            {
-                m_stopRequested = true;
-            }
+            m_mailNotifier.Color = Color.White;
         }
 
         #region IMailNotifierService Members
 
         [OperationBehavior(ReleaseInstanceMode = ReleaseInstanceMode.None)]
-        public void SetColor(byte red, byte green, byte blue)
+        public void SetColorRgb(byte red, byte green, byte blue)
         {
-            lock (m_threadLock)
-            {
-                m_stopRequested = true;
-                m_thread.Join();
-
-                lock(m_mailNotifier)
-                    m_mailNotifier.SetColor(Color.FromArgb(red, green, blue));
-            }
+            m_mailNotifier.Color = Color.FromArgb(red, green, blue);
         }
 
-        public void DoFadeTo(byte red, byte green, byte blue)
+        public void FadeToRgb(byte red, byte green, byte blue)
         {
-            lock (m_threadLock)
-            {
-                m_stopRequested = true;
-                m_thread.Join();
-                m_stopRequested = false;
+            var currentColor = m_mailNotifier.Color;
 
-                m_thread = new Thread(new ThreadStart(() =>
+            int maxR = Math.Min(red, NotifierColor.MaxColorValue);
+            int maxG = Math.Min(green, NotifierColor.MaxColorValue);
+            int maxB = Math.Min(blue, NotifierColor.MaxColorValue);
+
+            while (true)
+            {
+                for (int i = 0; i < NotifierColor.MaxColorValue; i++)
                 {
-                    int r = 0;
-                    int g = 0;
-                    int b = 0;
-                    
-                    int maxR = Math.Min(red, NotifierColor.MaxColorValue);
-                    int maxG = Math.Min(green, NotifierColor.MaxColorValue);
-                    int maxB = Math.Min(blue, NotifierColor.MaxColorValue);
+                    byte mappedRed = (byte)Map(i, 0, NotifierColor.MaxColorValue, 0, maxR);
+                    byte mappedGreen = (byte)Map(i, 0, NotifierColor.MaxColorValue, 0, maxG);
+                    byte mappedBlue = (byte)Map(i, 0, NotifierColor.MaxColorValue, 0, maxB);
 
-                    while (!m_stopRequested)
-                    {
-                        for (int i = 0; i < NotifierColor.MaxColorValue; i ++)
-                        {
-                            r = (byte)Map(i, 0, NotifierColor.MaxColorValue, 0, maxR);
-                            g = (byte)Map(i, 0, NotifierColor.MaxColorValue, 0, maxG);
-                            b = (byte)Map(i, 0, NotifierColor.MaxColorValue, 0, maxB);
+                    m_mailNotifier.Color = Color.FromArgb(mappedRed, mappedGreen, mappedBlue);
 
-                            lock (m_mailNotifier)
-                                m_mailNotifier.SetColor(Color.FromArgb(r,g,b));
+                    System.Threading.Thread.Sleep(25);
+                }
 
-                            System.Threading.Thread.Sleep(25);
-                        }
+                System.Threading.Thread.Sleep(100);
 
-                        System.Threading.Thread.Sleep(100);
-                        
-                        for (int i = NotifierColor.MaxColorValue; i >= 0; i--)
-                        {
-                            r = (byte)Map(i, 0, NotifierColor.MaxColorValue, 0, maxR);
-                            g = (byte)Map(i, 0, NotifierColor.MaxColorValue, 0, maxG);
-                            b = (byte)Map(i, 0, NotifierColor.MaxColorValue, 0, maxB);
-                            
-                            lock (m_mailNotifier)
-                                m_mailNotifier.SetColor(Color.FromArgb(r,g,b));
+                for (int i = NotifierColor.MaxColorValue; i >= 0; i--)
+                {
+                    byte mappedRed = (byte)Map(i, 0, NotifierColor.MaxColorValue, 0, maxR);
+                    byte mappedGreen = (byte)Map(i, 0, NotifierColor.MaxColorValue, 0, maxG);
+                    byte mappedBlue = (byte)Map(i, 0, NotifierColor.MaxColorValue, 0, maxB);
 
-                            System.Threading.Thread.Sleep(25);
-                        }
-                    }
-                }));
-                m_thread.IsBackground = true;
-                m_thread.Start();
+                    m_mailNotifier.Color = Color.FromArgb(mappedRed, mappedGreen, mappedBlue);
+
+                    System.Threading.Thread.Sleep(25);
+                }
             }
         }
 
-        public void DoFadeToMulti(byte[] colorBytes)
+        public void FadeToMultiRgb(byte[] colorBytes)
         {
             Color[] baseColors = new Color[colorBytes.Length / 3];
             for (int i = 0; i < baseColors.Length; i++)
@@ -116,34 +78,27 @@ namespace MailNotifierService
                 baseColors[i] = Color.FromArgb(maxR, maxG, maxB);
             }
 
-            lock (m_threadLock)
+            while (true)
             {
-                m_stopRequested = true;
-                m_thread.Join();
-                m_stopRequested = false;
-
-                m_thread = new Thread(new ThreadStart(() =>
+                for (int i = 0; i < baseColors.Length; i++)
                 {
-                    while (!m_stopRequested)
-                    {
-                        for (int i = 0; i < baseColors.Length; i++)
-                        {
-                            int maxR = baseColors[i].R;
-                            int maxG = baseColors[i].G;
-                            int maxB = baseColors[i].B;
+                    //int maxR = baseColors[i].R;
+                    //int maxG = baseColors[i].G;
+                    //int maxB = baseColors[i].B;
 
-                            FadeIn(maxR, maxG, maxB);
-                            System.Threading.Thread.Sleep(100);
-                            FadeOut(maxR, maxG, maxB);
-                        }
-                    }
-                }));
-                m_thread.IsBackground = true;
-                m_thread.Start();
+                    //FadeInRgb(maxR, maxG, maxB);
+                    //System.Threading.Thread.Sleep(100);
+                    //FadeOutRgb(maxR, maxG, maxB);
+
+                    var start = Color.FromArgb(baseColors[i].R, baseColors[i].G, baseColors[i].B);
+                    var end = Color.FromArgb(baseColors[(i + 1) % baseColors.Length].R, baseColors[(i + 1) % baseColors.Length].G, baseColors[(i + 1) % baseColors.Length].B);
+
+                    FadeFromTo(start, end);
+                }
             }
         }
 
-        private void FadeIn(int maxR, int maxG, int maxB)
+        private void FadeInRgb(int maxR, int maxG, int maxB)
         {
             for (int i = 0; i < NotifierColor.MaxColorValue; i++)
             {
@@ -151,14 +106,13 @@ namespace MailNotifierService
                 byte g = (byte)Map(i, 0, NotifierColor.MaxColorValue, 0, maxG);
                 byte b = (byte)Map(i, 0, NotifierColor.MaxColorValue, 0, maxB);
 
-                lock (m_mailNotifier)
-                    m_mailNotifier.SetColor(Color.FromArgb(r, g, b));
+                m_mailNotifier.Color = Color.FromArgb(r, g, b);
 
                 System.Threading.Thread.Sleep(25);
             }
         }
 
-        private void FadeOut(int maxR, int maxG, int maxB)
+        private void FadeOutRgb(int maxR, int maxG, int maxB)
         {
             for (int i = NotifierColor.MaxColorValue; i >= 0; i--)
             {
@@ -166,8 +120,32 @@ namespace MailNotifierService
                 byte g = (byte)Map(i, 0, NotifierColor.MaxColorValue, 0, maxG);
                 byte b = (byte)Map(i, 0, NotifierColor.MaxColorValue, 0, maxB);
 
-                lock (m_mailNotifier)
-                    m_mailNotifier.SetColor(Color.FromArgb(r, g, b));
+                m_mailNotifier.Color = Color.FromArgb(r, g, b);
+
+                System.Threading.Thread.Sleep(25);
+            }
+        }
+
+        private void FadeFromTo(Color start, Color end)
+        {
+            var startHsl = ColorUtil.RgbToHsl(start.R, start.G, start.B);
+            var endHsl = ColorUtil.RgbToHsl(end.R, end.G, end.B);
+
+            var hueRange = endHsl[0] - startHsl[0];
+            var saturationRange = endHsl[1] - startHsl[1];
+            var lightnessRange = endHsl[2] - startHsl[2];
+
+            int steps = 64;
+            // build table?
+            for (int step = 0; step < steps; step++)
+            {
+                var hue = Map(step, 0, steps, startHsl[0], endHsl[0]);
+                var saturation = Map(step, 0, steps, startHsl[1], endHsl[1]);
+                var lightness = Map(step, 0, steps, startHsl[2], endHsl[2]);
+
+                var colorBytes = ColorUtil.HslToRgb(hue, saturation, lightness);
+
+                m_mailNotifier.Color = Color.FromArgb(colorBytes[0], colorBytes[1], colorBytes[2]);
 
                 System.Threading.Thread.Sleep(25);
             }
@@ -177,7 +155,7 @@ namespace MailNotifierService
         private double Lerp(double value, double min, double max)
         {
             double diff = max - min;
-            double scaledValue =  diff * value + min;
+            double scaledValue = diff * value + min;
             return scaledValue;
         }
 

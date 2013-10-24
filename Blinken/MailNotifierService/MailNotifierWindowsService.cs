@@ -98,7 +98,6 @@ namespace MailNotifierService
 
         protected override void OnStop()
         {
-            m_mailNotifierService.Stop();
             m_serviceHost.Close();
             IDisposable disposable = m_serviceHost;
             disposable.Dispose();

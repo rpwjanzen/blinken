@@ -33,8 +33,6 @@ namespace Timer
             m_targetTime = DateTime.Parse(args[0]);
             m_warningTime = TimeSpan.Parse(args[1]);
 
-            UpdateSignText();
-
             m_updateSignTextThread = new Thread(new System.Threading.ThreadStart(() =>
             {
                 while (!m_isStopRequested)
@@ -56,11 +54,17 @@ namespace Timer
                     }
                 }
             }));
-            m_updateSignTextThread.Start();
+            
 
             m_updateTimerTextTimer = new SystemTimer();
             m_updateTimerTextTimer.Interval = TimeSpan.FromMilliseconds(500).TotalMilliseconds;
             m_updateTimerTextTimer.Elapsed += (s, e) => UpdateSignText();
+
+
+            RenderToLedSign("Hello");
+            System.Threading.Thread.Sleep(5000);
+            UpdateSignText();
+            m_updateSignTextThread.Start();
             m_updateTimerTextTimer.Start();
 
             Console.WriteLine("Press <Enter> to exit.");

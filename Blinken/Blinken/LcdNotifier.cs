@@ -24,12 +24,12 @@ namespace Blinken
             }
             if (m_device == null)
             {
-                Console.Error.WriteLine("Cannot find USB LED sign.");
+                Console.Error.WriteLine("!!!!!!!!!!!!!!!!!Cannot find USB LED sign!!!!!!!!!!!!!!!!!!!!!!!!");
                 return;
             }
         }
 
-        public string Text;
+        public string Text = "Hello";
         public bool[,] Image;
 
         public void ScrollImage(TimeSpan scrollDelay)

@@ -1,20 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using MailNotifierTimer.MailNotifierService;
 
 namespace MailNotifierTimer
 {
     class Program
     {
-        static bool m_isFlashEnabled = false;
-        static readonly object m_lock = new object();
-        static Color m_currentColor;
-        static bool m_stopRequested;
         static void Main(string[] args)
         {
             Color normalColor = Color.Green;
@@ -38,17 +30,12 @@ namespace MailNotifierTimer
                 return;
             }
 
-            m_currentColor = normalColor;
-
             System.Timers.Timer warningTimer = new System.Timers.Timer();
             warningTimer.Interval = timeToWarning.TotalMilliseconds;
             warningTimer.Elapsed += (s, e) =>
             {
                 warningTimer.Stop();
-                lock (m_lock)
-                {
-                    m_currentColor = warningColor;
-                }
+                TrySetColor(warningColor);
             };
             warningTimer.AutoReset = false;
             warningTimer.Start();
@@ -58,60 +45,23 @@ namespace MailNotifierTimer
             dangerTimer.Elapsed += (s, e) =>
             {
                 dangerTimer.Stop();
-                lock (m_lock)
-                {
-                    m_isFlashEnabled = true;
-                    m_currentColor = dangerColor;
-                }
+                TrySetColor(dangerColor);
             };
             dangerTimer.AutoReset = false;
             dangerTimer.Start();
 
-            System.Threading.Thread flashNotifierThread = new System.Threading.Thread(() =>
-            {
-                Color? previousColor = null;
-
-                while (!m_stopRequested)
-                {
-                    bool isFlashEnabled;
-                    Color currentColor;
-                    lock (m_lock)
-                    {
-                        isFlashEnabled = m_isFlashEnabled;
-                        currentColor = m_currentColor;
-                    }
-
-                    if (isFlashEnabled)
-                    {
-                        TrySetColor(Color.Black);
-                        System.Threading.Thread.Sleep(250);
-
-                        TrySetColor(currentColor);
-                        System.Threading.Thread.Sleep(250);
-                    }
-                    else
-                    {
-                        if (previousColor != currentColor)
-                        {
-                            TrySetColor(currentColor);
-                            previousColor = currentColor;
-                        }
-                    }
-                }
-            });
-            flashNotifierThread.Start();
-
             while (true)
             {
+                TrySetColor(normalColor);
+
                 Console.WriteLine("Press <Enter> to restart.");
                 Console.WriteLine("Press enter 'quit' to quit.");
                 string result = Console.ReadLine();
-                if (result == "quit")
-                    break;
 
-                m_currentColor = normalColor;
-                m_isFlashEnabled = false;
-                System.Threading.Thread.Sleep(500);
+                if (result == "quit")
+                {
+                    break;
+                }
 
                 warningTimer.Start();
                 dangerTimer.Start();
@@ -120,12 +70,7 @@ namespace MailNotifierTimer
             warningTimer.Dispose();
             dangerTimer.Dispose();
 
-            m_currentColor = normalColor;
-            m_isFlashEnabled = false;
             System.Threading.Thread.Sleep(500);
-
-            m_stopRequested = true;
-            flashNotifierThread.Join();
         }
 
         private static bool TrySetColor(Color color)
